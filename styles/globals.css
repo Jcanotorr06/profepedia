@@ -6,6 +6,9 @@
 
 :root {
     --button-transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    --button-color: #6ECB96;
+    --button-hover-color: #63b787;
+    --button-focus-color: #58a278;
 }
 
 .dark {
@@ -130,7 +133,7 @@
   }
 
   p, span, small {
-      color: var(--text-color);
+      /* color: var(--text-color); */
   }
 
   a {
@@ -147,18 +150,23 @@
   button:focus {
       outline: 0 none;
       outline-offset: 0;
-      box-shadow: var(--button-focus-shadow);
+      /* box-shadow: var(--button-focus-shadow); */
   }
 
   button.button-primary {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
+      background-color: var(--button-color);
+      border-color: var(--button-color);
       color: var(--primary-color-text);
   }
 
   button.button-primary:hover{
-      background-color: var(--primary-focused);
-      border-color: var(--primary-focused);
+      background-color: var(--button-hover-color);
+      border-color: var(--button-hover-color);
+  }
+
+  button.button-primary:focus{
+    background-color: var(--button-focus-color);
+    border-color: var(--button-focus-color);
   }
 
   button.button-text-primary {
@@ -170,6 +178,11 @@
   button.button-text-primary:hover {
       background-color: var(--surface-hover);
       border-color: var(--surface-hover);
+  }
+
+  button.icon-btn {
+    background-color: transparent;
+    border-color: transparent;
   }
 
   button.button-raised {
