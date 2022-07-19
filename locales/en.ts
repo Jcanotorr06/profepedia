@@ -1,5 +1,7 @@
 const messages = {
-    "hello": "Hello"
+    "hello": "Hello",
+    "logout": "Logout",
+    "login": "LogIn"
 }
 
 export default messages
