@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import NavBar from "../components/Navigation/NavBar"
+import { NavBar } from "../components/Navigation"
 import { useMode } from "../context/ModeContext"
 
 type Props = {
