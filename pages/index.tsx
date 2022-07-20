@@ -1,7 +1,9 @@
-import type { GetStaticProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
 import { Translate } from '../components/Translation'
 import { useUser, useLocale, useMode } from '../context'
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   const { locale, changeLocale } = useLocale()
@@ -20,19 +22,16 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="">
-        <i className='bi bi-linkedin'/>
-        <Translate label="hello"/>
-        <button onClick={() =>onChangeLocale()} className="button-primary">Change Language</button>
-        <button onClick={() => swapMode()}>
-          <i className='bi bi-sun-fill' />
-        </button>
-        <div className='p-4'>
-          <button onClick={() => !user ? login('josephct06@gmail.com'): logout()}>
-            {
-              !user ?'login':'logout'
-            }
-          </button>
+      <main className="grid grid-cols-12 gap-2 min-h-full justify-center relative">
+        <div className="border border-red-500 col-span-12 lg:col-span-5">
+          <Link href="/docente/792">
+            <a>
+              Hello
+            </a>
+          </Link>
+        </div>
+        <div className="border border-blue-500 col-span-12 lg:col-span-7">
+          World
         </div>
       </main>
     </>
