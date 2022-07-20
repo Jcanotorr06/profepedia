@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { NavBar } from "../components/Navigation"
+import { Footer, MobileNavBar, NavBar } from "../components/Navigation"
 import { useMode } from "../context/ModeContext"
 
 type Props = {
@@ -16,6 +16,7 @@ const DefaultLayout = ({children}:Props) => {
             <main className="pt-4">
                 {children}
             </main>
+            <Footer/>
         </div>
     )
 }
