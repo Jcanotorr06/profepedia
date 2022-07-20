@@ -6,6 +6,7 @@ import { UserProvider } from '../context/UserContext'
 import { ModeProvider, useMode } from '../context/ModeContext'
 import { LocaleProvider } from '../context/LocaleContext'
 import DefaultLayout from '../layouts/default'
+import { TopMessage } from '../components/Notifications'
 
 function MyApp({ Component, pageProps }: AppProps) {
   
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <UserProvider>
         <ModeProvider>
           <LocaleProvider>
+            <TopMessage/>
             <DefaultLayout>
               <Component {...pageProps}/>
             </DefaultLayout>
