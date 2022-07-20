@@ -49,7 +49,7 @@ const LanguageDropdown = () => {
                     initial={{opacity: 0, y: -100, scale: 0}}
                     animate={{opacity: 1, y: 0, scale: 1}}
                     exit={{opacity: 0, y: -50, scale: 0}}
-                    className="absolute rounded-md flex flex-col bg-white drop-shadow-sm w-full top-12">
+                    className="absolute rounded-md flex flex-col bg-white drop-shadow-sm w-full top-12 z-50">
                         {locales.map((loc, i) => (
                             <button  
                                 key={i} 
