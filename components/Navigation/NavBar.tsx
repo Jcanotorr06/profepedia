@@ -2,41 +2,105 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from 'next/router';
 import { AnimatePresence, motion } from "framer-motion"
-import { useMode, useUser } from "../../context"
-import { Button, IconButton } from "../Buttons"
-import { LanguageDropdown } from "../Translation"
+import { useModal, useMode, useUser, useSearch } from "../../context"
+import { TextButton, IconButton } from "../Buttons"
+import { LanguageDropdown, Translate } from "../Translation"
+import { useIntl } from "react-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { FormEvent, useState } from 'react';
+import Logo from '../../public/logo.svg'
 
+interface SearchInput {
+  prof: string
+}
 
 const NavBar = () => {
 
+  const intl = useIntl()
+  const route = useRouter()
+  const { register, handleSubmit:formHandleSubmit, formState } = useForm<SearchInput>()
   const { mode, swapMode } = useMode()
   const { user } = useUser()
-  const route = useRouter()
+  const { openModal } = useModal()
+  const { handleSearch, previousQuery, query:_query } = useSearch()
+
+  const handleSubmit:SubmitHandler<SearchInput> = (data) => {
+    handleSearch(data.prof)
+  }
 
   const classNames = {
     'light': 'text-yellow-400 hover:text-yellow-500 hover:border-yellow-200 focus:text-yellow-600 focus:border-yellow-300',
     'dark': 'text-indigo-500 hover:text-indigo-300 hover:border-indigo-400 focus:text-indigo-300 focus:border-indigo-500'
   }
+
   return (
-    <nav className="bg-transparent w-full top-0 mb-4 justify-between items-center align-middle py-2 px-4 border-b hidden lg:flex">
+    <nav className="w-full top-0 justify-between items-center align-middle py-2 px-4 border-b hidden lg:flex">
       <Link href="/">
         <a>
-          <Image src="/logo.svg" height={40} width={40} alt="logo"/>
+          <Image src={Logo} height={40} width={40} alt="logo"/>
         </a>
       </Link>
+      
       {
-        route.pathname !== '/' && (
-          <div>
-            Search Bar
-          </div>
-        )
+        //DONE: ADD FORM VALIDATION FOR THE SEARCH BAR AND BUTTON TO TRIGGER SUBMIT 💙
+        //DONE: DESIGN SEARCH RESULT CARDS 💙
+
+        //TO DO: ADD TEACHER PAGE CONTENT
+        //TO DO: ADD SEARCH BAR TO MOBILE NAV BAR LIKE IN GOOGLE
+        //TO DO: ADD FOOTER CONTENT
+        //TO DO: EXTRACT LOADING SCREEN COMPONENT
+        //TO DO: CREATE NOTIFICATION CONTEXT AND IMPLEMENT FOR ERRORS
+        //TO DO: ADD CONTACT FORM TO CONTACT PAGE
+        //TO DO: ADD PRIVACY POLICY, TERMS AND CONDITIONS, COOKIE POLICY PAGES
+        //TO DO: ADD COOKIE NOTIFICATION
+        //TO DO: ADD SEARCH BAR TO LANDING SCREEN
+        //TO DO: ADD CONTENT TO ABOUT PAGE
+        //TO DO: ADD REVIEW MODAL (NOT ROUTE)
+        //TO DO: ADD SEARCH PAGE WITH NO QUERY WHERE USER WILL REUSE THE LANDING SEARCH BAR
+        //TO DO: ADD LOGIN AND LOGOUT
+        //TO DO: ADD PROFILE PAGE WHERE USER CAN MANAGE THEIR REVIEWS ¿AND DELETE THE ACCOUNT?
       }
+      <div className="flex gap-4 mr-auto ml-8 text-sm xl:text-base">
+        <Link href="/">
+          <a>
+            <Translate label="home" className={route.route === '/' ? 'font-bold' : ''}/>
+          </a>
+        </Link>
+        <Link href="/about">
+          <a>
+            <Translate label="about" className={route.route === '/about' ? 'font-bold' : ''}/>
+          </a>
+        </Link>
+        <Link href="/faq">
+          <a>
+            <Translate label="faq" className={route.route === '/faq' ? 'font-bold' : ''}/>
+          </a>
+        </Link>
+        <Link href="/contacto">
+          <a>
+            <Translate label="contact" className={route.route === '/contacto' ? 'font-bold' : ''}/>
+          </a>
+        </Link>
+      </div>
+      <form name="nav_search_form" className="flex grow-1 px-8 justify-center" onSubmit={formHandleSubmit(handleSubmit)}>
+          <div className="flex w-full max-w-xl text-sm input input-text gap-2">
+            <input 
+              type="text"
+              id="nav_search"
+              className="flex-1 border-none "
+              autoComplete="search_professor"
+              placeholder={intl.formatMessage({id: 'search_placeholder', defaultMessage: 'Buscar profesor'})}
+              {...register("prof", {required: true, minLength: 2, maxLength: 20})}/>
+              <IconButton icon="bi-search" type="submit" className="text-lg px-3 rounded-full" rippleClassName="rounded-full"/>
+          </div>
+      </form>
       <div className="flex items-center row gap-5">
         <div className="col-span-1">
-          <Button 
+          <TextButton 
             text={!user ? "login" : "logout"} 
-            className="button-primary button-raised px-12 py-2 rounded-full font-bold" 
-            handleClick={() => {}}/>
+            className="button-primary button-raised px-8 py-2 rounded-full font-bold text-sm xl:text-base" 
+            rippleClassName="rounded-full"
+            handleClick={() => openModal('Login Modal')}/>
         </div>
         <div className="col-span-1">
           <LanguageDropdown/>
@@ -48,7 +112,8 @@ const NavBar = () => {
             >
               <IconButton
                 icon={mode === 'light' ? 'bi-sun-fill' : 'bi-moon-stars-fill'} 
-                className={`icon-btn py-2 px-3 rounded-full text-lg border border-transparent ${classNames[mode]}`} 
+                className={`icon-btn py-2 px-3 rounded-full text-lg border border-transparent ${classNames[mode]}`}
+                rippleClassName="rounded-full" 
                 handleClick={() => swapMode()}/>
             </motion.div>
       </div>

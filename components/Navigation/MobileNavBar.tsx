@@ -9,6 +9,10 @@ const MobileNavBar = () => {
   
   const [show, setShow] = useState<boolean>(false)
 
+  const handleLink = () => {
+    setShow(false)
+  }
+
   const liVariants = {
     closed: {
       opacity: 0,
@@ -22,12 +26,11 @@ const MobileNavBar = () => {
       y: "0%",
     }
   }
-
   return (
-    <nav className="bg-transparent w-full top-0 mb-4 justify-between items-center align-middle py-2 px-4 border-b flex lg:hidden">
-      <div className="relative z-40">
+    <nav className="w-full top-0 justify-between items-center align-middle py-2 px-4 border-b flex lg:hidden">
+      <div className="relative z-20">
         <Link href="/">
-          <a>
+          <a onClick={() => handleLink()}>
             <Image src="/logo.svg" height={30} width={30} alt="logo"/>
           </a>
         </Link>
@@ -37,7 +40,7 @@ const MobileNavBar = () => {
         animate={show ? "open" : "closed"}
         className="relative"
       >
-        <button onClick={() => setShow(!show)} className="z-40 relative bg-transparent">
+        <button onClick={() => setShow(!show)} className="z-20 relative bg-transparent">
           <svg width="23" height="23" viewBox="0 0 23 23">
             <motion.path
               fill="transparent"
@@ -88,7 +91,7 @@ const MobileNavBar = () => {
             }
           }
         }} 
-        className="fixed top-0 left-0 h-screen w-screen text-center bg-white z-20 pt-16">
+        className="fixed top-0 left-0 h-screen w-screen text-center bg-white z-10 pt-16">
             <motion.ul
             variants={{
               closed: {
@@ -111,7 +114,11 @@ const MobileNavBar = () => {
               >
                 <motion.div
                 variants={liVariants}>
-                  <Translate label="home" className="text-2xl font-medium"/>
+                  <Link href="/">
+                    <a onClick={() => handleLink()}>
+                      <Translate label="home" className="text-2xl font-medium"/>
+                    </a>
+                  </Link>
                 </motion.div>
               </motion.li>
               <motion.li
@@ -120,7 +127,11 @@ const MobileNavBar = () => {
               >
                 <motion.div
                 variants={liVariants}>
-                  <Translate label="home" className="text-2xl font-medium"/>
+                  <Link href="/about">
+                    <a onClick={() => handleLink()}>
+                      <Translate label="about" className="text-2xl font-medium"/>
+                    </a>
+                  </Link>
                 </motion.div>
               </motion.li>
               <motion.li
@@ -129,7 +140,24 @@ const MobileNavBar = () => {
               >
                 <motion.div
                 variants={liVariants}>
-                  <Translate label="home" className="text-2xl font-medium"/>
+                  <Link href="/faq">
+                    <a onClick={() => handleLink()}>
+                      <Translate label="faq" className="text-2xl font-medium"/>
+                    </a>
+                  </Link>
+                </motion.div>
+              </motion.li>
+              <motion.li
+              key={"key_4"}
+                whileTap={{scale: 0.95}}
+              >
+                <motion.div
+                variants={liVariants}>
+                  <Link href="/contacto">
+                    <a onClick={() => handleLink()}>
+                      <Translate label="contact" className="text-2xl font-medium"/>
+                    </a>
+                  </Link>
                 </motion.div>
               </motion.li>
             </motion.ul>
