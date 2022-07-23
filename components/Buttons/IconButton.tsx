@@ -1,16 +1,18 @@
+import React from 'react'
+import Button from './Button'
 
-
-interface Props{
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     icon: string,
-    className: string,
-    handleClick: () => void
+    className?: string,
+    handleClick?: () => void,
+    rippleClassName?: string
 }
 
-const IconButton = ({icon, className, handleClick}:Props) => {
+const IconButton = ({icon, handleClick, ...rest}:Props) => {
   return (
-    <button onClick={() => handleClick()} className={className}>
-        <i className={`bi ${icon}`}/>
-    </button>
+    <Button {...rest} handleClick={handleClick}>
+      <i className={`bi ${icon}`}/>
+    </Button>
   )
 }
 
