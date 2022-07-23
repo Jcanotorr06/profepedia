@@ -2,6 +2,7 @@
 import { FocusEventHandler, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocale } from './../../context/LocaleContext';
+import TextButton from './../Buttons/TextButton';
 
 const LanguageDropdown = () => {
     const {locale, changeLocale} = useLocale()
@@ -30,10 +31,12 @@ const LanguageDropdown = () => {
     return (
         <div className="relative">
             <button 
-                className="text-center py-2 px-8 rounded-full font-bold bg-white border border-transparent hover:cursor-pointer hover:border-slate-200 focus:border-slate-300"
+                className="text-center py-2 px-8 rounded-full font-bold dropdown border border-transparent hover:cursor-pointer hover:border-slate-200 focus:border-slate-300"
                 onClick={() => handleDropdown()}
                 onBlur={handleBlur}>
-                {locale.toUpperCase()}&nbsp;
+                    <span>
+                        {locale.toUpperCase()}&nbsp;
+                    </span>
                 <motion.div
                 key={`${showDropdown}`}
                 initial={{opacity: 1, rotate: 180}} 
@@ -44,21 +47,21 @@ const LanguageDropdown = () => {
             </button>
             <AnimatePresence>
                 {showDropdown && (
-                    <motion.div 
+                    <motion.nav 
                     key="locale_dropdown"
                     initial={{opacity: 0, y: -100, scale: 0}}
                     animate={{opacity: 1, y: 0, scale: 1}}
                     exit={{opacity: 0, y: -50, scale: 0}}
-                    className="absolute rounded-md flex flex-col bg-white drop-shadow-sm w-full top-12 z-50">
+                    className="absolute rounded-md flex flex-col drop-shadow-sm w-full top-12 z-30">
                         {locales.map((loc, i) => (
-                            <button  
+                            <TextButton  
                                 key={i} 
-                                className="px-4 py-3 font-bold bg-white w-full hover:bg-slate-100 rounded-md"
-                                onClick={() => handleChangeLocale(loc)}>
-                                {loc.toUpperCase()}
-                            </button>
+                                className="px-4 py-3 font-bold w-full rounded-md"
+                                rippleClassName='rounded-md'
+                                handleClick={() => handleChangeLocale(loc)}
+                                text={loc.toUpperCase()}/>
                         ))}
-                    </motion.div>
+                    </motion.nav>
                 )}
             </AnimatePresence>
         </div>
