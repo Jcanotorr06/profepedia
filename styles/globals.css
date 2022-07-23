@@ -5,10 +5,18 @@
 @import url('./fonts.css');
 
 :root {
-    --button-transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    --button-transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, background-image 0.35s;
+    --ultra-red: #FF6A81;
+    --aquamarine-green: #6ECB96;
+    --majorele-blue: #6C4BDA;
+    
     --button-color: #6ECB96;
     --button-hover-color: #63b787;
     --button-focus-color: #58a278;
+}
+
+* {
+  scroll-behavior: smooth;
 }
 
 .dark {
@@ -56,6 +64,9 @@
     --focus-ring: 0 0 0 0.2rem rgba(165, 180, 252, 0.5);
     --maskbg: rgba(0, 0, 0, 0.4);
     --button-focus-shadow: 0 0 0 2px #1c2127, 0 0 0 4px rgba(165, 180, 252, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+    --hover-overlay: linear-gradient(rgba(255,255,255,0.05)0 0);
+
+    color-scheme: dark;
   }
 
 .light {
@@ -103,14 +114,50 @@
     --focus-ring: 0 0 0 0.2rem #C7D2FE;
     --maskbg: rgba(0, 0, 0, 0.4);
     --button-focus-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b1b3f8, 0 1px 2px 0 black;
+    --hover-overlay: linear-gradient(rgba(0,0,0,0.05)0 0);
+
+    color-scheme: light;
   }
 
   body, .body {
       background-color: var(--surface-ground);
+      height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
   }
 
-  nav, .surface {
+  header, footer {
+    z-index: 11;
+    position: relative;
+  }
+
+  nav, .surface, dialog {
       background-color: var(--surface-overlay);
+      border-color: var(--surface-border);
+  }
+
+  .surface-item {
+      background-color: var(--surface-overlay);
+      border-color: var(--surface-border);
+  }
+
+  .surface-item:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--surface-border);
+    cursor: pointer;
+  }
+
+  .muted {
+    color: var(--text-color-secondary);
+  }
+
+  .dropdown {
+    background-color: var(--surface-hover);
+  }
+
+  footer {
+    background-color: var(--gray-900);
+    color: var(--gray-100);
   }
 
   .overlay {
@@ -118,9 +165,9 @@
       opacity: 50%;
   }
 
-  .gradient-background {
+  /* .gradient-background {
     background: linear-gradient(242.01deg, rgba(110, 202, 151, 0.11) -1.02%, rgba(110, 202, 151, 0.11) -1.01%, rgba(110, 202, 151, 0.11) -1%, rgba(218, 255, 234, 0.42) 23.38%, rgba(253, 106, 129, 0) 98.66%), var(--surface-a);
-  }
+  } */
 
   button {
       transition: var(--button-transition);
@@ -132,19 +179,28 @@
       color: var(--surface-900);
   }
 
-  p, span, small {
-      /* color: var(--text-color); */
+  p, small, span {
+      color: var(--text-color);
   }
 
-  a {
+  a, a span {
       text-decoration: none;
-      color: var(--primary-color);
-      font-weight: 600;
+      color: var(--text-color);
+      font-weight: 500;
       cursor: pointer;
+      transition: font-weight 0.1s;
   }
-  a:hover{
-      text-decoration: underline;
-      color: var(--primary-focused)
+  a:hover, a span:hover{
+      color: var(--surface-900);
+      font-weight: 700;
+  }
+
+  button:hover{
+    background-image: var(--hover-overlay);
+  }
+
+  button:focus{
+    background-image: none;
   }
 
   button:focus {
@@ -160,7 +216,6 @@
   }
 
   button.button-primary:hover{
-      background-color: var(--button-hover-color);
       border-color: var(--button-hover-color);
   }
 
@@ -218,7 +273,7 @@
     transform: translate(-50%, -50%);
   }
 
-  input {
+  input, .input {
     font-size: 1rem;
     color: #495057;
     background: var(--surface-ground);
@@ -228,12 +283,41 @@
     appearance: none;
     border-radius: 6px;
   }
-  input:enabled:hover {
-    border-color: var(--primary-color);
+  .input input, .input input[type="text"] {
+    background-color: transparent;
+    padding: 0;
+    border: unset;
   }
-  input:enabled:focus {
+  input:enabled:hover, .input:hover {
+    border-color: var(--surface-600);
+  }
+
+  .input input:hover {
+    border-color: transparent;
+  }
+
+  input:enabled:focus, .input:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem #C7D2FE;
-    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem var(--surface-300);
+    border-color: var(--surface-800);
+  }
+
+  .input input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: transparent;
+  }
+  input[type='text']{
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+  }
+
+  .input-text {
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+  }
+
+  .score{
+    color: #212121;
   }
