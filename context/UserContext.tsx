@@ -62,8 +62,10 @@ export function UserProvider({children}:Props) {
             handleAuthChange(event, session)
             console.log(session)
             if(event === 'SIGNED_IN'){
+                if(router.route === '/'){
+                    router.push('/')
+                }
                 setSession(session)
-                router.push('/')
             }
             if(event === 'SIGNED_OUT') {
                 setSession(null)
@@ -73,7 +75,7 @@ export function UserProvider({children}:Props) {
         return () => {
             data?.unsubscribe()
         }
-    }, [])
+    }, [router])
 
     const login = async (email:string) => {
         setLoading(true)
