@@ -1,0 +1,21 @@
+//RATING SCHEMA
+export type rating = {
+    id: number,
+    created_at: string,
+    rating: number,
+    dificultad: number,
+    wouldTakeAgain: boolean,
+    isCredit: boolean,
+    useTextbooks: boolean,
+    attendanceMandatory: boolean,
+    nota: string,
+    review: string,
+    asignatura: string,
+    tag1: string | null,
+    tag2: string | null,
+    tag3: string | null,
+    id_docente: number,
+    id_user: string,
+    likes: number,
+    dislikes: number,
+}

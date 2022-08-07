@@ -1,0 +1,1 @@
+export type modalTypes = 'LOGIN' | 'LOGIN_CONFIRMATION' | 'LOGOUT' | 'LOGOUT_CONFIRMATION' | ''
