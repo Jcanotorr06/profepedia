@@ -13,7 +13,6 @@ const DefaultLayout = ({children}:Props) => {
 
     return (
     <>
-        <Modal/>
         <div className={`${mode} body h-full flex flex-col`}>
             <header className="w-full">
                 <NavBar/>

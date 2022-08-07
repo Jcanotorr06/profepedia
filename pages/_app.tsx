@@ -1,18 +1,19 @@
 import '../styles/globals.css'
 import '../styles/cursor.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'react-toastify/dist/ReactToastify.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import NextNProgress from 'nextjs-progressbar'
+import { useEffect } from 'react';
 import { UserProvider } from '../context/UserContext'
 import { ModeProvider, useMode } from '../context/ModeContext'
 import { LocaleProvider } from '../context/LocaleContext'
 import DefaultLayout from '../layouts/default'
-import { TopMessage } from '../components/Notifications'
-import { useEffect } from 'react';
+import { Toast, TopMessage } from '../components/Notifications'
 import { disableReactDevTools } from '../utils/disableReactDevTools'
-import { ModalProvider, SearchProvider } from '../context'
-import { useModal } from './../context/ModalContext';
-import NextNProgress from 'nextjs-progressbar'
+import { ModalProvider, ProfessorProvider, SearchProvider } from '../context'
+import { Modal } from './../components/Modals';
 
 function MyApp({ Component, pageProps }: AppProps) {
   
@@ -41,11 +42,15 @@ function MyApp({ Component, pageProps }: AppProps) {
             <ModalProvider>
               <NextNProgress height={6} color="#6C4BDA"/>
               <TopMessage/>
-              <SearchProvider>
-                <DefaultLayout>
-                  <Component {...pageProps}/>
-                </DefaultLayout>
-              </SearchProvider>
+              <ProfessorProvider>
+                <SearchProvider>
+                  <Toast/>
+                  <Modal/>
+                  <DefaultLayout>
+                    <Component {...pageProps}/>
+                  </DefaultLayout>
+                </SearchProvider>
+              </ProfessorProvider>
             </ModalProvider>
           </LocaleProvider>
         </ModeProvider>
