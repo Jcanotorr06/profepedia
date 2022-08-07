@@ -9,6 +9,7 @@ class MyDocument extends Document {
             <link rel="manifest" href="/manifest.json" />
             <link rel="apple-touch-icon" href="/icon.png"></link>
             <meta name="theme-color" content="#fff" />
+            <meta name="description" content="Profepedia. Help other students by rating and reviewing your professors" />
           </Head>
           <body>
             <Main />
