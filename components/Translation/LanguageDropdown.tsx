@@ -31,7 +31,7 @@ const LanguageDropdown = () => {
     return (
         <div className="relative">
             <button 
-                className="text-center py-2 px-8 rounded-full font-bold dropdown border border-transparent hover:cursor-pointer hover:border-slate-200 focus:border-slate-300"
+                className="text-center py-3 lg:py-2 px-8 rounded-full w-full font-bold dropdown border lg:border-transparent hover:cursor-pointer hover:border-slate-200 focus:border-slate-300"
                 onClick={() => handleDropdown()}
                 onBlur={handleBlur}>
                     <span>
@@ -52,7 +52,7 @@ const LanguageDropdown = () => {
                     initial={{opacity: 0, y: -100, scale: 0}}
                     animate={{opacity: 1, y: 0, scale: 1}}
                     exit={{opacity: 0, y: -50, scale: 0}}
-                    className="absolute rounded-md flex flex-col drop-shadow-sm w-full top-12 z-30">
+                    className="absolute rounded-md flex flex-col drop-shadow-sm w-full top-12 z-30 border lg:border-transparent">
                         {locales.map((loc, i) => (
                             <TextButton  
                                 key={i} 
