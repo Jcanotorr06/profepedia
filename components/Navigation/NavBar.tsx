@@ -3,12 +3,14 @@ import Link from "next/link"
 import { useRouter } from 'next/router';
 import { AnimatePresence, motion } from "framer-motion"
 import { useModal, useMode, useUser, useSearch } from "../../context"
-import { TextButton, IconButton } from "../Buttons"
+import { TextButton, IconButton, ModeSwitchButton } from "../Buttons"
 import { LanguageDropdown, Translate } from "../Translation"
 import { useIntl } from "react-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormEvent, useState } from 'react';
 import Logo from '../../public/logo.svg'
+import { LoginModal } from "../Modals";
+import { toast } from "react-toastify";
 
 interface SearchInput {
   prof: string
@@ -20,12 +22,23 @@ const NavBar = () => {
   const route = useRouter()
   const { register, handleSubmit:formHandleSubmit, formState } = useForm<SearchInput>()
   const { mode, swapMode } = useMode()
-  const { user } = useUser()
+  const { user, logout } = useUser()
   const { openModal } = useModal()
   const { handleSearch, previousQuery, query:_query } = useSearch()
 
   const handleSubmit:SubmitHandler<SearchInput> = (data) => {
     handleSearch(data.prof)
+  }
+
+  const handleLogout = async () => {
+    await logout()
+      .then(res => {
+        if(res){
+          toast.success(intl.formatMessage({id: "logout_success", defaultMessage: "Sesión cerrada exitosamente."}))
+        }else{
+          toast.error(intl.formatMessage({id: "logout_error", defaultMessage: "Ha ocurrido un error al cerrar sesión."}))
+        }
+      })
   }
 
   const classNames = {
@@ -40,26 +53,6 @@ const NavBar = () => {
           <Image src={Logo} height={40} width={40} alt="logo"/>
         </a>
       </Link>
-      
-      {
-        //DONE: ADD FORM VALIDATION FOR THE SEARCH BAR AND BUTTON TO TRIGGER SUBMIT 💙
-        //DONE: DESIGN SEARCH RESULT CARDS 💙
-
-        //TO DO: ADD TEACHER PAGE CONTENT
-        //TO DO: ADD SEARCH BAR TO MOBILE NAV BAR LIKE IN GOOGLE
-        //TO DO: ADD FOOTER CONTENT
-        //TO DO: EXTRACT LOADING SCREEN COMPONENT
-        //TO DO: CREATE NOTIFICATION CONTEXT AND IMPLEMENT FOR ERRORS
-        //TO DO: ADD CONTACT FORM TO CONTACT PAGE
-        //TO DO: ADD PRIVACY POLICY, TERMS AND CONDITIONS, COOKIE POLICY PAGES
-        //TO DO: ADD COOKIE NOTIFICATION
-        //TO DO: ADD SEARCH BAR TO LANDING SCREEN
-        //TO DO: ADD CONTENT TO ABOUT PAGE
-        //TO DO: ADD REVIEW MODAL (NOT ROUTE)
-        //TO DO: ADD SEARCH PAGE WITH NO QUERY WHERE USER WILL REUSE THE LANDING SEARCH BAR
-        //TO DO: ADD LOGIN AND LOGOUT
-        //TO DO: ADD PROFILE PAGE WHERE USER CAN MANAGE THEIR REVIEWS ¿AND DELETE THE ACCOUNT?
-      }
       <div className="flex gap-4 mr-auto ml-8 text-sm xl:text-base">
         <Link href="/">
           <a>
@@ -84,14 +77,14 @@ const NavBar = () => {
       </div>
       <form name="nav_search_form" className="flex grow-1 px-8 justify-center" onSubmit={formHandleSubmit(handleSubmit)}>
           <div className="flex w-full max-w-xl text-sm input input-text gap-2">
+            <IconButton icon="bi-search" type="submit" className="text-lg mr-3 px-1 rounded-full" rippleClassName="rounded-full"/>
             <input 
               type="text"
               id="nav_search"
               className="flex-1 border-none "
               autoComplete="search_professor"
               placeholder={intl.formatMessage({id: 'search_placeholder', defaultMessage: 'Buscar profesor'})}
-              {...register("prof", {required: true, minLength: 2, maxLength: 20})}/>
-              <IconButton icon="bi-search" type="submit" className="text-lg px-3 rounded-full" rippleClassName="rounded-full"/>
+              {...register("prof", {required: true, minLength: 2, maxLength: 20, pattern: {value: /^[A-Za-z]+$/, message: "only_letters"}})}/>
           </div>
       </form>
       <div className="flex items-center row gap-5">
@@ -100,7 +93,7 @@ const NavBar = () => {
             text={!user ? "login" : "logout"} 
             className="button-primary button-raised px-8 py-2 rounded-full font-bold text-sm xl:text-base" 
             rippleClassName="rounded-full"
-            handleClick={() => openModal('Login Modal')}/>
+            handleClick={() => !user ? openModal("LOGIN") : handleLogout()}/>
         </div>
         <div className="col-span-1">
           <LanguageDropdown/>
@@ -110,11 +103,7 @@ const NavBar = () => {
             initial={{opacity: 1, rotate: 360}}
             animate={{opacity: 1,rotate: 0}}
             >
-              <IconButton
-                icon={mode === 'light' ? 'bi-sun-fill' : 'bi-moon-stars-fill'} 
-                className={`icon-btn py-2 px-3 rounded-full text-lg border border-transparent ${classNames[mode]}`}
-                rippleClassName="rounded-full" 
-                handleClick={() => swapMode()}/>
+              <ModeSwitchButton/>
             </motion.div>
       </div>
     </nav>

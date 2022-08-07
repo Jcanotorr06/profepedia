@@ -1,15 +1,52 @@
 import Image from "next/image"
 import Link from "next/link"
 import { HTMLMotionProps, motion, SVGMotionProps } from 'framer-motion'
-import { IconButton } from "../Buttons"
+import { IconButton, ModeSwitchButton, TextButton } from "../Buttons"
 import { useState } from 'react';
-import { Translate } from "../Translation";
+import { LanguageDropdown, Translate } from "../Translation";
+import { useModal, useMode, useSearch, useUser } from "../../context";
+import { toast } from 'react-toastify';
+import { useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
+
+interface SearchInput {
+  prof: string
+}
+
 
 const MobileNavBar = () => {
   
   const [show, setShow] = useState<boolean>(false)
+  const { user, logout } = useUser()
+  const { openModal } = useModal()
+  const { handleSearch } = useSearch()
+  const { mode } = useMode()
+  const intl = useIntl()
+  const { register, handleSubmit:formHandleSubmit, formState } = useForm<SearchInput>()
 
   const handleLink = () => {
+    setShow(false)
+  }
+
+  const handleSubmit:SubmitHandler<SearchInput> = (data) => {
+    handleSearch(data.prof)
+    setShow(false)
+  }
+
+  const handleLogout = async () => {
+    await logout()
+      .then(res => {
+        if(res){
+          toast.success(intl.formatMessage({id: "logout_success", defaultMessage: "Sesión cerrada exitosamente."}))
+        }else{
+          toast.error(intl.formatMessage({id: "logout_error", defaultMessage: "Ha ocurrido un error al cerrar sesión."}))
+        }
+      })
+  }
+
+  const handleLogin = () => {
+    openModal("LOGIN")
     setShow(false)
   }
 
@@ -91,7 +128,7 @@ const MobileNavBar = () => {
             }
           }
         }} 
-        className="fixed top-0 left-0 h-screen w-screen text-center bg-white z-10 pt-16">
+        className="fixed top-0 left-0 h-screen w-screen text-center surface z-10 pt-16">
             <motion.ul
             variants={{
               closed: {
@@ -107,7 +144,7 @@ const MobileNavBar = () => {
                 }
               }
             }}
-            className="flex flex-col items-center w-full gap-10">
+            className="flex flex-col items-center w-full gap-10 h-full">
               <motion.li
               key={"key_1"}
                 whileTap={{scale: 0.95}}
@@ -158,6 +195,103 @@ const MobileNavBar = () => {
                       <Translate label="contact" className="text-2xl font-medium"/>
                     </a>
                   </Link>
+                </motion.div>
+              </motion.li>
+              <motion.li
+              key={"key_0"}
+                whileTap={{scale: 0.95}}
+                className="w-full px-4"
+              >
+                <motion.div
+                className="w-full"
+                variants={liVariants}>
+                  <form name="nav_search_form" className="flex grow-1 justify-center w-full" onSubmit={formHandleSubmit(handleSubmit)}>
+                      <div className="flex w-full text-sm input input-text gap-2">
+                        <IconButton icon="bi-search" type="submit" className="text-lg mr-3 px-1 rounded-full" rippleClassName="rounded-full"/>
+                        <input 
+                          type="text"
+                          id="nav_search"
+                          className="flex-1 border-none "
+                          autoComplete="search_professor"
+                          placeholder={intl.formatMessage({id: 'search_placeholder', defaultMessage: 'Buscar profesor'})}
+                          {...register("prof", {required: true, minLength: 2, maxLength: 20})}/>
+                      </div>
+                  </form>
+                </motion.div>
+              </motion.li>
+              <motion.li
+              key={"key_5"}
+                whileTap={{scale: 0.95}}
+                className="w-full px-4"
+              >
+                <motion.div
+                variants={liVariants}
+                className="w-full">
+                  <TextButton 
+                    text={!user ? "login" : "logout"} 
+                    className="button-primary button-raised py-3 rounded-full font-bold text-sm w-full" 
+                    rippleClassName="rounded-full w-full" 
+                    handleClick={() => !user ? handleLogin() : handleLogout()}/>
+                </motion.div>
+              </motion.li>
+              <motion.li
+                key={"key_6"}
+                whileTap={{scale: 0.95}}
+                className="w-full px-4 flex justify-between gap-2">
+                <motion.div
+                  variants={liVariants}
+                  className="flex-auto">
+                  <LanguageDropdown/>
+                </motion.div>
+                <motion.div
+                  variants={liVariants}
+                  className="flex-1">
+                  <motion.div
+                    key={`btn-${mode}`}
+                    initial={{opacity: 1, rotate: 360}}
+                    animate={{opacity: 1,rotate: 0}}
+                    >
+                      <ModeSwitchButton/>
+                  </motion.div>
+                </motion.div>
+              </motion.li>
+              <motion.li
+              key={"key_7"}
+                whileTap={{scale: 0.95}}
+                className="w-full px-4 mt-auto mb-4"
+              >
+                <motion.div
+                variants={liVariants}
+                className="w-full flex-col">
+                  <div className="font-black">
+                    <small>
+                      <Link href="/terminos">
+                        <a onClick={() => handleLink()}>Terminos y Condiciones</a>
+                      </Link>
+                    </small>
+                    &nbsp;•&nbsp;
+                    <small>
+                      <Link href="/privacidad">
+                        <a onClick={() => handleLink()}>Privacidad</a>
+                      </Link>
+                    </small>
+                    &nbsp;•&nbsp;
+                    <small>
+                      <Link href="/reglas">
+                        <a onClick={() => handleLink()}>Reglas de Uso</a>
+                      </Link>
+                    </small>
+                    &nbsp;•&nbsp;
+                    <small>
+                      <Link href="/copyright">
+                        <a onClick={() => handleLink()}>Copyright</a>
+                      </Link>
+                    </small>
+                    &nbsp;•&nbsp;
+                    <small>
+                        <a onClick={() => handleLink()} href="https://ko-fi.com/profepedia" target="blank" rel="noref noopener">Donaciones</a>
+                    </small>
+                  </div>
                 </motion.div>
               </motion.li>
             </motion.ul>
