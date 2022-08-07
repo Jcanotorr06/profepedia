@@ -2,6 +2,7 @@ import { AuthChangeEvent, Session } from "@supabase/supabase-js"
 import { useRouter } from "next/router"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { supabase } from "../utils/supabaseClient"
+import { useModal } from "./ModalContext"
 
 type userContext = {
     user: any,
@@ -9,19 +10,24 @@ type userContext = {
     loading: boolean,
     message?: string,
     error?: string,
-    login: (email:string) => void,
-    logout: () => void
+    /**
+     * Función que toma como parametro un email para realizar el inicio de sesion. Si el inicio de sesión es exitoso, regresa true, de otra manera, regresa false. 
+     * @param {string} email Direccion de correo electronico
+     * @returns {Promise<boolean>} true o false
+     */
+    login: (email:string) => Promise<boolean>
+    logout: () => Promise<boolean>
 }
 
 const userContextDefault:userContext = {
     user: null,
     session: null,
     loading: false,
-    login(email:string) {
-        
+    login(email) {
+        return new Promise<boolean>((resolve) => {resolve(true)})
     },
     logout() {
-        
+        return new Promise<boolean>((resolve) => {resolve(true)})
     },
 }
 
@@ -37,6 +43,7 @@ type Props = {
 
 export function UserProvider({children}:Props) {
     const router = useRouter()
+    const { openModal } = useModal()
     const [user, setUser] = useState<any>(null)
     const [session, setSession] = useState<Session|null>(null)
     const [error, setError] = useState<any>(undefined)
@@ -45,6 +52,7 @@ export function UserProvider({children}:Props) {
 
     const checkUser = async () => {
         const supabaseUser = supabase.auth.user()
+        console.log(supabaseUser)
         setUser(supabaseUser)
     } 
 
@@ -77,30 +85,43 @@ export function UserProvider({children}:Props) {
         }
     }, [router])
 
-    const login = async (email:string) => {
-        setLoading(true)
-        const { error, user } = await supabase.auth.signIn({email})
-        if(!error){
-            console.log(user)
-            setMessage("logged_in_msg")
-        }else{
-            console.error(error)
-            setError(error.message)
-        }
-        setLoading(false)
+    const login = (email:string) => {
+        return new Promise<boolean>(async (resolve, reject) => {
+            setLoading(true)
+            const { error, user } = await supabase.auth.signIn({email})
+            if(!error) {
+                console.log(user)
+                resolve(true)
+                setLoading(false)
+                return
+            }else{
+                console.error(error)
+                resolve(false)
+                setLoading(false)
+                return
+            }
+        })
     }
 
     const logout = async () => {
-        setLoading(true)
-        const { error } = await supabase.auth.signOut()
-        if(!error) {
-            setUser(null)
-            setMessage('logged_out_msg')
-        }else{
-            console.error(error)
-            setError(error.message)
-        }
-        setLoading(false)
+        return new Promise<boolean>(async (resolve, reject) => {
+            setLoading(true)
+            const { error } = await supabase.auth.signOut()
+            if(!error) {
+                setUser(null)
+                setMessage('logged_out_msg')
+                resolve(true)
+                setLoading(false)
+                router.push('/')
+                return
+            }else{
+                console.error(error)
+                setError(error.message)
+                resolve(false)
+                setLoading(false)
+                return
+            }
+        })
     }
 
     const value:userContext = {
