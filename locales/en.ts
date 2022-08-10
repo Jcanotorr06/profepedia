@@ -18,6 +18,11 @@ const messages = {
     "login_email_ph": "Student email address",
     "login_success_title": "Authentication Link Sent Successfully",
     "login_success_message": "Please check your email and click on the link that has just been sent to finish the login process.",
+    "general_rating": "General Rating",
+    "would_take_again": "Would Take Again",
+    "difficulty": "Difficulty",
+    "quality": "Quality",
+    "ratings": "Ratings"
 }
 
 export default messages

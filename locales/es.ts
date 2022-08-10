@@ -18,6 +18,11 @@ const messages = {
     "login_email_ph": "Dirección de correo universitaria",
     "login_success_title": "Link de Autenticación Enviado Exitosamente",
     "login_success_message": "Revisa tu correo electronico y haz clic en el link que te enviamos para iniciar sesión.",
+    "general_rating": "Calificación General",
+    "would_take_again": "Recomendaría su Clase",
+    "difficulty": "Dificultad",
+    "quality": "Calidad",
+    "ratings": "Calificaciones"
 }
 
 export default messages
