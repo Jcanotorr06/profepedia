@@ -38,7 +38,7 @@ const SearchResults:FC = () => {
                                     <div className="flex justify-between">
                                     <div className="flex flex-col justify-center items-center mr-4">
                                         <div className="text-xs font-bold mb-2 uppercase text-center">
-                                        Calidad
+                                        <Translate label="quality"/>
                                         </div>
                                         <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black ${result.rating === 0 ? 'bg-gray-300' : result.rating < 3 ? 'bg-red-300' : result.rating < 4 ? 'bg-yellow-300' : 'bg-green-400'}`}>
                                         <div className="score">
@@ -46,7 +46,7 @@ const SearchResults:FC = () => {
                                         </div>
                                         </div>
                                         <div className=" text-xs text-center">
-                                        {result.cant_rating} ratings
+                                        {result.cant_rating} <Translate label="ratings"/>
                                         </div>
                                     </div>
                                     </div>
@@ -64,7 +64,7 @@ const SearchResults:FC = () => {
                                     </div>
                                     <div className="text-xs">
                                         <p>
-                                        <span className="font-bold">Would take again:</span> {result.cant_rating > 0 ? `${((result.cant_wouldTakeAgain/result.cant_rating)*100).toFixed(0)}%` : '0%'} | <span className="font-bold">Difficulty</span>: {result.dificultad}
+                                        <span className="font-bold"><Translate label="would_take_again"/>:</span> {result.cant_rating > 0 ? `${((result.cant_wouldTakeAgain/result.cant_rating)*100).toFixed(0)}%` : '0%'} | <span className="font-bold"><Translate label="difficulty"/></span>: {result.dificultad}
                                         </p>
                                     </div>
                                     </div>
