@@ -1,3 +1,4 @@
+import { PostgrestError } from "@supabase/supabase-js";
 import Router from "next/router";
 import { createContext, ReactNode, useContext, useState } from "react"
 import { profesorProfile } from "../types/profesorProfile"
@@ -15,6 +16,11 @@ type professorContext = {
     reviews: rating[],
     getData: (id: number, professor?:searchResult, refresh?:boolean) => Promise<boolean>,
     handleSelection: (selection:any) => void,
+}
+
+type profesorSelect = {
+    data: profesorProfile[],
+    error: PostgrestError | null
 }
 
 const professorContextDefault:professorContext = {
@@ -96,8 +102,20 @@ export function ProfessorProvider({children}:Props) {
                     console.log('FETCHING DATA NOW 🤑')
                     setId(professorId)
                 }
-            }else{
+            }
+            else if(data && data.id === professorId){
+                console.log('SAME PROFESSOR, DO NOT REFETCH')
+            }
+            else{
                 console.log('FETCH ALL THE DATA NOWWWWWW 🤬')
+                const { data, error } = await supabase.from("resultado_busqueda_v2").select("*").eq("id", professorId) as profesorSelect
+                    if(!error) {
+                        setData({...data[0]})
+                    }else{
+                        setLoading(false)
+                        resolve(false)
+                        return
+                    }
             }
             const rev = await getReviews(professorId, refresh)
             if(rev){

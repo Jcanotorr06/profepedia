@@ -4,10 +4,11 @@ import { Loading } from "../../../components/Navigation"
 import { useProfessor } from "../../../context"
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { formatGroup, formatNombre } from "../../../utils/utils";
+import { formatGroup, formatNombre, isNumeric } from "../../../utils/utils";
 import { IconButton } from "../../../components/Buttons";
 import { useIntl } from 'react-intl';
 import { Translate } from "../../../components/Translation";
+import { toast } from "react-toastify";
 
 
 const Docente:NextPage = () => {
@@ -16,36 +17,34 @@ const Docente:NextPage = () => {
   const intl = useIntl()
 
   const [id, setId] = useState<number|null>(null)
-
-/*   const handleLoad = useCallback(() => {
-    const id = router.query.id ? parseInt(router.query.id as string) : 0
-    console.log(id)
-
-    getData(id)
-  }, [])
+  const [_loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    handleLoad()
-  }, [handleLoad]) */
-
-  useEffect(() => {
-    if(router.query.id && typeof router.query.id === 'string'){
+    if(router.query.id && typeof router.query.id === 'string' && isNumeric(router.query.id)){
+      console.log(isNumeric(router.query.id), router.query.id, typeof router.query.id)
       setId(parseInt(router.query.id))
     }
   }, [router.query.id])
 
   useEffect(() => {
-    if(id){
+    if(id && !data && !loading){
       console.log(id)
+      getData(id)
     }
-  }, [id])
+  }, [id, data, loading])
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000);
+  })
 
   return (
     <>
       <Head>
         <title>{intl.formatMessage({id: "professor_title", defaultMessage: "Profesor(a) {name}"}, {name: data?.nombre})}</title>
       </Head>
-      <Loading className="h-screen w-screen" active={loading}>
+      <Loading className="h-screen w-screen" active={loading||_loading}>
           <main className="w-full min-h-full flex flex-col gap-6 px-4 md:px-2 lg:px-24">
             <section className="flex flex-col md:flex-row gap-4 col-span-12 surface">
               <article className="flex flex-col grow-1 border border-blue-400 p-4 gap-2">
@@ -96,7 +95,18 @@ const Docente:NextPage = () => {
                 </div>
               </article>
               <article className="flex flex-col grow-1 border border-red-400 col-span-6">
-                Ratings breakdown
+                <div>
+                  <Translate label="ratings_breakdown" className="text-xl font-bold"/>
+                </div>
+                <div className="flex flex-col justify-around flex-1">
+                  {[...Array(5)].map((x, i) => (
+                    <div className="w-full bg-blue-300" key={i}>
+                      <div className="w-1/2 h-full py-3 bg-green-200">
+                        &nbsp;
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </article>
             </section>
             <section className="flex col-span-12 border border-orange-800">
