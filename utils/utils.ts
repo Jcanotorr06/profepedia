@@ -1,7 +1,8 @@
 export {
     toTitleCase,
     formatNombre,
-    formatGroup
+    formatGroup,
+    isNumeric
 }
 
 const toTitleCase = (phrase:string) => {
@@ -18,4 +19,8 @@ const formatNombre = (nombre:string) => {
 
 const formatGroup = (group:string) => {
     return toTitleCase(group.trimStart())
+}
+
+const isNumeric = (str:string) => {
+    return /^\d+$/.test(str);
 }
