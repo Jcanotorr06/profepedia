@@ -10,12 +10,42 @@ import Business from '../public/landing/business.svg'
 import { toast } from 'react-toastify'
 import Load from 'react-loading';
 import { IconButton } from '../components/Buttons'
+import { GradeBar, GradeGraph } from '../components/GradeGraph'
+import { Grade } from '../types/grade'
 
 const Home: NextPage = () => {
 
   const notify = () => {
     toast.error("Ha ocurrido un error")
   }
+
+  const grades:Grade[] = [
+    {
+      grade: 5,
+      ratio: 0.4,
+      title: 'Awesome'
+    },
+    {
+      grade: 4,
+      ratio: 0.5,
+      title: 'Good'
+    },
+    {
+      grade: 3,
+      ratio: 0.1,
+      title: 'Neutral'
+    },
+    {
+      grade: 2,
+      ratio: 0,
+      title: 'Bad'
+    },
+    {
+      grade: 1,
+      ratio: 0,
+      title: 'Horrible'
+    },
+  ]
   return (
     <>
       <Head>
@@ -38,8 +68,11 @@ const Home: NextPage = () => {
             <Load color='#000' type="bubbles"/>
           </div>
           <div className=''>
-            <div className="flex justify-between w-full rounded-full input-main input shadow-lg border">
+            {/* <div className="flex justify-between w-full rounded-full input-main input shadow-lg border">
               <input type="text" className="px-3 py-10 text-lg rounded-full w-full input_transparent" placeholder="Nombre del profesor" />
+            </div> */}
+              <GradeGraph grades={grades}/>
+            <div className="flex flex-col gap-4">
             </div>
           </div>
         </div>

@@ -9,6 +9,8 @@ import { IconButton } from "../../../components/Buttons";
 import { useIntl } from 'react-intl';
 import { Translate } from "../../../components/Translation";
 import { toast } from "react-toastify";
+import { Grade } from "../../../types/grade";
+import { GradeGraph } from "../../../components/GradeGraph";
 
 
 const Docente:NextPage = () => {
@@ -38,6 +40,34 @@ const Docente:NextPage = () => {
       setLoading(false)
     }, 1000);
   })
+
+  const grades:Grade[] = [
+    {
+      grade: 5,
+      ratio: 0.4,
+      title: 'Awesome'
+    },
+    {
+      grade: 4,
+      ratio: 0.5,
+      title: 'Good'
+    },
+    {
+      grade: 3,
+      ratio: 0.1,
+      title: 'Neutral'
+    },
+    {
+      grade: 2,
+      ratio: 0,
+      title: 'Bad'
+    },
+    {
+      grade: 1,
+      ratio: 0,
+      title: 'Horrible'
+    },
+  ]
 
   return (
     <>
@@ -94,18 +124,12 @@ const Docente:NextPage = () => {
                   </div>
                 </div>
               </article>
-              <article className="flex flex-col grow-1 border border-red-400 col-span-6">
+              <article className="flex flex-col grow-1 border border-red-400 col-span-6 p-2">
                 <div>
                   <Translate label="ratings_breakdown" className="text-xl font-bold"/>
                 </div>
-                <div className="flex flex-col justify-around flex-1">
-                  {[...Array(5)].map((x, i) => (
-                    <div className="w-full bg-blue-300" key={i}>
-                      <div className="w-1/2 h-full py-3 bg-green-200">
-                        &nbsp;
-                      </div>
-                    </div>
-                  ))}
+                <div className="p-3">
+                  <GradeGraph grades={grades}/>
                 </div>
               </article>
             </section>
