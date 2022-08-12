@@ -142,6 +142,10 @@
       border-color: var(--surface-border);
   }
 
+  .ground {
+    background-color: var(--surface-ground)
+  }
+
   .surface-item:hover {
     background-color: var(--surface-hover);
     border-color: var(--surface-border);
