@@ -19,3 +19,9 @@ export type rating = {
     likes: number,
     dislikes: number,
 }
+
+export type rating_breakdown = {
+    rating: number,
+    count: number,
+    id_docente: number
+}

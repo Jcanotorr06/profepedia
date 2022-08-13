@@ -2,7 +2,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 import Router from "next/router";
 import { createContext, ReactNode, useContext, useState } from "react"
 import { profesorProfile } from "../types/profesorProfile"
-import { rating } from "../types/rating";
+import { rating, rating_breakdown } from "../types/rating";
 import { searchResult } from "../types/searchResult"
 import { supabase } from './../utils/supabaseClient';
 
@@ -14,12 +14,18 @@ type professorContext = {
     failure: boolean,
     data: profesorProfile | null,
     reviews: rating[],
+    ratingBreakdown: rating_breakdown[],
     getData: (id: number, professor?:searchResult, refresh?:boolean) => Promise<boolean>,
     handleSelection: (selection:any) => void,
 }
 
 type profesorSelect = {
     data: profesorProfile[],
+    error: PostgrestError | null
+}
+
+type ratingBreakdownSelect = {
+    data: rating_breakdown[],
     error: PostgrestError | null
 }
 
@@ -31,6 +37,7 @@ const professorContextDefault:professorContext = {
     failure: false,
     data: null,
     reviews: [],
+    ratingBreakdown: [],
     getData: (id) => {
         return new Promise<boolean>((resolve) => {resolve(true)})
     },
@@ -55,6 +62,7 @@ export function ProfessorProvider({children}:Props) {
     const [failure, setFailure] = useState<boolean>(false)
     const [data, setData] = useState<profesorProfile|null>(null)
     const [reviews, setReviews] = useState<rating[]>([])
+    const [ratingBreakdown, setRatingBreakdown] = useState<rating_breakdown[]>([])
 
     const handleTest = (professor:searchResult) => {
         return new Promise<void>((resolve) => {
@@ -91,6 +99,22 @@ export function ProfessorProvider({children}:Props) {
         })
     }
 
+    const getRatingsBreakdown = async (professorId:number) => {
+        console.log("Getting Ratings breakdown")
+        return new Promise<boolean>(async resolve => {
+            const { data, error } = await supabase.from("rating_breakdown").select("*").eq("id_docente", professorId) as ratingBreakdownSelect
+            console.log('RATING BREAKDOWN', data)
+            if(!error && data){
+                setRatingBreakdown(data)
+                resolve(true)
+                return
+            }else{
+                resolve(false)
+                return
+            }
+        })
+    }
+
     const getData = async (professorId: number, professor?:searchResult, refresh?:boolean) => {
         return new Promise<boolean>(async (resolve) => {
             setLoading(true)
@@ -118,7 +142,8 @@ export function ProfessorProvider({children}:Props) {
                     }
             }
             const rev = await getReviews(professorId, refresh)
-            if(rev){
+            const breakdown = await getRatingsBreakdown(professorId)
+            if(rev && breakdown){
                 resolve(true)
                 setLoading(false)
                 return
@@ -138,6 +163,7 @@ export function ProfessorProvider({children}:Props) {
         failure,
         data,
         reviews,
+        ratingBreakdown,
         getData,
         handleSelection
     }
