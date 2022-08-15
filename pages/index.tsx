@@ -23,27 +23,32 @@ const Home: NextPage = () => {
     {
       grade: 5,
       ratio: 0.4,
-      title: 'Awesome'
+      title: 'awesome',
+      count: Math.floor(Math.random()*10)
     },
     {
       grade: 4,
       ratio: 0.5,
-      title: 'Good'
+      title: 'good',
+      count: Math.floor(Math.random()*10)
     },
     {
       grade: 3,
       ratio: 0.1,
-      title: 'Neutral'
+      title: 'regular',
+      count: Math.floor(Math.random()*10)
     },
     {
       grade: 2,
       ratio: 0,
-      title: 'Bad'
+      title: 'bad',
+      count: Math.floor(Math.random()*10)
     },
     {
       grade: 1,
       ratio: 0,
-      title: 'Horrible'
+      title: 'horrible',
+      count: Math.floor(Math.random()*10)
     },
   ]
   return (
