@@ -184,7 +184,7 @@
       color: var(--surface-900);
   }
 
-  p, small, span {
+  p, small, span, select {
       color: var(--text-color);
   }
 
