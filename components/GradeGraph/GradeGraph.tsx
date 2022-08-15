@@ -10,7 +10,7 @@ const GradeGraph = ({grades}:Props) => {
   return (
     <div className="flex flex-col gap-4">
         {grades.map((grade, i) => (
-            <GradeBar key={i} textLeft={grade.title}textRigth={`${grade.grade}`} ratio={grade.ratio}/>
+            <GradeBar key={i} textLeft={grade.title}textRigth={`${grade.count}`} ratio={grade.ratio}/>
         ))}
     </div>
   )

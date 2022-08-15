@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { Translate } from '../Translation'
 
 interface Props{
     ratio: number,
@@ -10,8 +11,8 @@ interface Props{
 const GradeBar = ({ratio, textLeft, textRigth}:Props) => {
     return (
         <div className="flex gap-4 items-center">
-            <div className="flex-1">{textLeft}</div>
-                <motion.div className="w-full h-10 ground overflow-hidden" style={{flex: 5}}>
+            <div className="flex-1"><Translate label={textLeft}/></div>
+                <motion.div className="w-full h-10 ground overflow-hidden drop-shadow rounded-md" style={{flex: 5}}>
                     <motion.div 
                         initial={{width: 0}} 
                         animate={{width: `${100*ratio}%`}} 
