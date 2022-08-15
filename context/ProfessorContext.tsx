@@ -2,21 +2,27 @@ import { PostgrestError } from "@supabase/supabase-js";
 import Router from "next/router";
 import { createContext, ReactNode, useContext, useState } from "react"
 import { profesorProfile } from "../types/profesorProfile"
-import { rating, rating_breakdown } from "../types/rating";
+import { likedDisliked, rating, rating_breakdown } from "../types/rating";
 import { searchResult } from "../types/searchResult"
 import { supabase } from './../utils/supabaseClient';
+import moment from 'moment';
 
 type professorContext = {
     id: number | null,
     selection: searchResult|null,
     loading: boolean,
+    loadingMore: boolean,
     success: boolean,
     failure: boolean,
     data: profesorProfile | null,
     reviews: rating[],
+    reviewCount: number,
     ratingBreakdown: rating_breakdown[],
+    likedDisliked: likedDisliked[],
     getData: (id: number, professor?:searchResult, refresh?:boolean) => Promise<boolean>,
+    loadMore: (professorId: number) => void,
     handleSelection: (selection:any) => void,
+    sortReviews: (sortBy:string) => void,
 }
 
 type profesorSelect = {
@@ -29,19 +35,29 @@ type ratingBreakdownSelect = {
     error: PostgrestError | null
 }
 
+type likedDislikedSelect = {
+    data: likedDisliked[],
+    error: PostgrestError | null
+}
+
 const professorContextDefault:professorContext = {
     id: null,
     selection: null,
     loading: false,
+    loadingMore: false,
     success: false,
     failure: false,
     data: null,
     reviews: [],
+    reviewCount: 0,
     ratingBreakdown: [],
+    likedDisliked: [],
     getData: (id) => {
         return new Promise<boolean>((resolve) => {resolve(true)})
     },
-    handleSelection: () => {}
+    loadMore: (professorId) => {},
+    handleSelection: () => {},
+    sortReviews: (sortBy) => {},
 }
 
 const ProfessorContext = createContext<professorContext>(professorContextDefault)
@@ -62,7 +78,10 @@ export function ProfessorProvider({children}:Props) {
     const [failure, setFailure] = useState<boolean>(false)
     const [data, setData] = useState<profesorProfile|null>(null)
     const [reviews, setReviews] = useState<rating[]>([])
+    const [reviewCount, setReviewCount] = useState<number>(0)
     const [ratingBreakdown, setRatingBreakdown] = useState<rating_breakdown[]>([])
+    const [loadingMore, setLoadingMore] = useState<boolean>(false)
+    const [likedDisliked, setLikedDisliked] = useState<likedDisliked[]>([])
 
     const handleTest = (professor:searchResult) => {
         return new Promise<void>((resolve) => {
@@ -83,13 +102,14 @@ export function ProfessorProvider({children}:Props) {
         })
     }
 
-    const getReviews = async (professorId:number, refresh?:boolean) => {
+    const getReviews = async (professorId:number, limit:number, rangeStart:number, rangeEnd:number, refresh?:boolean) => {
         console.log("GETTIGN REVIEWS")
         return new Promise<boolean>(async (resolve) => {
-            const { data:_reviews, error } = await supabase.rpc('reviews_docente', {_id_docente: professorId})
-            console.log('REVIEWS: ',_reviews, error)
-            if(!error && _reviews){
+            const { data:_reviews, error, count } = await supabase.from("reviews_docentes_v2").select("*", {count: 'exact'}).eq("id_docente", professorId).limit(limit).order("likes", {ascending: false}).range(rangeStart, rangeEnd)
+            console.log('REVIEWS: ',_reviews, 'COUNT: ', count, 'ERROR: ', error)
+            if(!error && _reviews && count){
                 setReviews(_reviews)
+                setReviewCount(count)
                 resolve(true)
                 return
             }else{
@@ -99,13 +119,57 @@ export function ProfessorProvider({children}:Props) {
         })
     }
 
+    const sortReviews = (sortBy:string) => {
+        switch(sortBy){
+            case 'date':
+                setReviews(rev => rev.sort((a,b) => moment(a.created_at).diff(moment(b.created_at))))
+                break;
+            default:
+                setReviews(rev => rev.sort((a,b) => a.likes-b.likes))
+                break;
+        }
+    }
+
+    const loadMore = async (professorId:number) => {
+        setLoadingMore(true)
+        const { data:_reviews, error } = await supabase.from("reviews_docentes_v2").select("*").eq("id_docente", professorId).limit(10).order("likes", {ascending: false}).range(reviews.length, reviews.length+9)
+        if(_reviews && !error) {
+            setReviews(sr => [...sr, ..._reviews])
+            setSuccess(true)
+            setFailure(false)
+            setLoadingMore(false)
+        }else{
+            setReviews(sr => sr)
+            setSuccess(false)
+            setFailure(true)
+            setLoading(false)
+        }
+    }
+
     const getRatingsBreakdown = async (professorId:number) => {
         console.log("Getting Ratings breakdown")
         return new Promise<boolean>(async resolve => {
             const { data, error } = await supabase.from("rating_breakdown").select("*").eq("id_docente", professorId) as ratingBreakdownSelect
-            console.log('RATING BREAKDOWN', data)
             if(!error && data){
-                setRatingBreakdown(data)
+                let breakdown:rating_breakdown[] = []
+                if(data.length < 5){
+                    for(let i = 0; i < 5; i++){
+                        let item = data.find(x => x.rating === i+1)
+                        if(item){
+                            breakdown.push(item)
+                            continue
+                        }
+                        breakdown.push({
+                            rating: i+1,
+                            count: 0,
+                            id_docente: professorId
+                        })
+                    }
+                    breakdown.sort((a,b) => a.rating - b.rating)
+                    breakdown.reverse()
+                }
+                console.log('RATING BREAKDOWN', breakdown)
+                setRatingBreakdown(breakdown)
                 resolve(true)
                 return
             }else{
@@ -113,6 +177,17 @@ export function ProfessorProvider({children}:Props) {
                 return
             }
         })
+    }
+
+    const getLikedDisliked = async () => {
+        const user = supabase.auth.user()
+        if(user){
+            const { id } = user
+            const { data, error } = await supabase.from("LikeDislike_Rating").select("*").eq("id_usuario", id) as likedDislikedSelect
+            if(data && !error) {
+                setLikedDisliked(data)
+            }
+        }
     }
 
     const getData = async (professorId: number, professor?:searchResult, refresh?:boolean) => {
@@ -141,7 +216,7 @@ export function ProfessorProvider({children}:Props) {
                         return
                     }
             }
-            const rev = await getReviews(professorId, refresh)
+            const rev = await getReviews(professorId, 10, 0, 9, refresh)
             const breakdown = await getRatingsBreakdown(professorId)
             if(rev && breakdown){
                 resolve(true)
@@ -159,13 +234,18 @@ export function ProfessorProvider({children}:Props) {
         id,
         selection,
         loading,
+        loadingMore,
         success,
         failure,
         data,
         reviews,
+        reviewCount,
         ratingBreakdown,
+        likedDisliked,
         getData,
-        handleSelection
+        loadMore,
+        handleSelection,
+        sortReviews
     }
 
     return (
