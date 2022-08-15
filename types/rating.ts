@@ -25,3 +25,9 @@ export type rating_breakdown = {
     count: number,
     id_docente: number
 }
+
+export type likedDisliked = {
+    id_rating: number,
+    id_usuario: string,
+    likeDisliked: "like"|"dislike"
+}
