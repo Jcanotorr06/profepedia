@@ -254,6 +254,11 @@
       pointer-events: none;
   }
 
+  button.disabled {
+    background-color: var(--button-disabled-color);
+    cursor: default !important;
+  }
+
   .grow-1 {
       flex-grow: 1;
   }
