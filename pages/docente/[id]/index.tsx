@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import Head from "next/head"
 import { Loading } from "../../../components/Navigation"
-import { useLocale, useProfessor } from "../../../context"
+import { useLocale, useModal, useProfessor, useUser } from "../../../context"
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState, FormEvent } from 'react';
 import { formatGroup, formatNombre, isNumeric } from "../../../utils/utils";
@@ -24,6 +24,8 @@ const Docente:NextPage = () => {
   const router = useRouter()
   const intl = useIntl()
   const { locale } = useLocale()
+  const { user } = useUser()
+  const { openModal, closeModal } = useModal()
 
   const [id, setId] = useState<number|null>(null)
   const [_loading, setLoading] = useState<boolean>(true)
@@ -73,6 +75,14 @@ const Docente:NextPage = () => {
   const handleOrderBy = (event: FormEvent<HTMLSelectElement>) => {
     setOrderBy(event.currentTarget.value)
     sortReviews(orderBy)
+  }
+  
+  const handleRateClick = () => {
+    if(!user){
+      openModal("REVIEW", {size: 'full'})
+    }else{
+      toast.warn(intl.formatMessage({id: 'must_be_logged_in', defaultMessage: 'Debe iniciar sesión.'}))
+    }
   }
 
   return (
@@ -136,9 +146,9 @@ const Docente:NextPage = () => {
                 <div className="flex gap-3 w-full">
                   <div className="w-full">
                     <TextButton 
-                      handleClick={() => {}} 
+                      handleClick={() => handleRateClick()} 
                       text="rate_professor" 
-                      className="px-4 py-3 font-bold button-primary rounded-full w-full" 
+                      className={`px-4 py-3 font-bold button-primary rounded-full w-full ${user ? '' : 'disabled'}`}
                       rippleClassName="rounded-full w-full"/>
                   </div>
                 </div>
