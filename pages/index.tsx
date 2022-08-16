@@ -22,33 +22,33 @@ const Home: NextPage = () => {
   const grades:Grade[] = [
     {
       grade: 5,
-      ratio: 0.4,
+      ratio: Math.random(),
       title: 'awesome',
-      count: Math.floor(Math.random()*10)
+      count: 4
     },
     {
       grade: 4,
-      ratio: 0.5,
+      ratio: Math.random(),
       title: 'good',
-      count: Math.floor(Math.random()*10)
+      count: 6
     },
     {
       grade: 3,
-      ratio: 0.1,
+      ratio: Math.random(),
       title: 'regular',
-      count: Math.floor(Math.random()*10)
+      count: 8
     },
     {
       grade: 2,
-      ratio: 0,
+      ratio: Math.random(),
       title: 'bad',
-      count: Math.floor(Math.random()*10)
+      count: 3
     },
     {
       grade: 1,
-      ratio: 0,
+      ratio: Math.random(),
       title: 'horrible',
-      count: Math.floor(Math.random()*10)
+      count: 3
     },
   ]
   return (
