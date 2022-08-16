@@ -94,7 +94,7 @@ const Docente:NextPage = () => {
           <main className="w-full min-h-full flex flex-col gap-6 px-4 md:px-2 lg:px-24">
             <section className="flex flex-col md:flex-row gap-4 col-span-12 surface drop-shadow rounded-md justify-center">
               <article className="flex flex-col grow-1 p-4 gap-2">
-                <div className="flex col-span-full">
+                <div className="flex col-span-full w-full justify-center md:justify-start">
                   <div className="flex flex-col items-center">
                     <h1 className="text-6xl font-black">{data && data.rating.toFixed(1)}</h1>
                   </div>
@@ -102,7 +102,7 @@ const Docente:NextPage = () => {
                     <sup className="text-sm font-bold muted">/5</sup>
                   </div>
                 </div>
-                <div className="flex col-span-full mt-1 mb-2">
+                <div className="flex col-span-full mt-1 mb-2 justify-center md:justify-start">
                   <span className="text-xs"><Translate label="general_rating" values={{cant: data?.cant_rating}}/></span>
                 </div>
                 <div className="flex col-span-full">
@@ -170,7 +170,7 @@ const Docente:NextPage = () => {
                 :
                 <>
                   <div className="border-b border-gray-300 flex">
-                      <div className="font-bold border-b border-black px-2 select-none"><Translate label="review_count" values={{count: reviewCount}}/></div>
+                      <div className="font-bold border-b border-black px-2 select-none w-full lg:w-1/5"><Translate label="review_count" values={{count: reviewCount}}/></div>
                   </div>
                   <div>
                     <select name="order" id="" value={orderBy} className="px-6 py-2 surface rounded shadow" onChange={handleOrderBy}>
@@ -184,18 +184,18 @@ const Docente:NextPage = () => {
 
                       </div>
                       <div className="flex flex-col flex-grow gap-3">
-                        <div className="flex gap-3 items-center text-sm">
-                          <div className="font-black text-base"><h2>{review.asignatura}</h2></div>
+                        <div className="flex gap-1 md:gap-3 items-center text-sm flex-nowrap">
+                          <div className="font-black md:text-base"><h2>{review.asignatura}</h2></div>
                           <div className={`px-3 py-1 font-bold text-xs rounded ${review.rating === 0 ? 'bg-gray-300' : review.rating < 3 ? 'bg-red-300' : review.rating < 4 ? 'bg-yellow-300' : 'bg-green-400'}`}>
                             <Translate label={`score_${titles[review.rating]}`}/>
                           </div>
-                          <div className="flex-grow text-right">
+                          <div className="flex-grow md:text-right">
                             <span>
                               {moment(review.created_at).locale(locale).format('MMMM Do, YYYY')}
                             </span>
                           </div>
                         </div>
-                        <div className="flex gap-3 text-sm">
+                        <div className="flex gap-3 text-sm flex-wrap">
                           <div><Translate label="is_credit"/><Translate label={review.isCredit ? 'yes':'no'} className="font-bold"/></div>
                           <div><Translate label="attendance_mandatory"/><Translate label={review.attendanceMandatory ? 'mandatory':'optional'} className="font-bold"/></div>
                           <div><Translate label="would_take_again_tag"/><Translate label={review.isCredit ? 'yes':'no'} className="font-bold"/></div>
