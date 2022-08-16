@@ -179,9 +179,28 @@ const Docente:NextPage = () => {
                     </select>
                   </div>
                   {reviews.map((review) =>(
-                    <article className="surface px-4 py-4 rounded-md shadow flex gap-3" key={review.id}>
-                      <div className="flex flex-col">
-
+                    <article className="surface px-4 py-4 rounded-md shadow flex flex-col md:flex-row gap-3" key={review.id}>
+                      <div className="flex flex-row md:flex-col justify-around">
+                        <div className="flex flex-col justify-center items-center mr-4">
+                            <div className="text-xs font-bold mb-2 uppercase text-center">
+                                <Translate label="quality"/>
+                            </div>
+                            <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black ${review.rating === 0 ? 'bg-gray-300' : review.rating < 3 ? 'bg-red-300' : review.rating < 4 ? 'bg-yellow-300' : 'bg-green-400'}`}>
+                                <div className="score">
+                                    {review.rating.toFixed(1)}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col justify-center items-center mr-4">
+                            <div className="text-xs font-bold mb-2 uppercase text-center">
+                                <Translate label="difficulty"/>
+                            </div>
+                            <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black ground`}>
+                                <span>
+                                    {review.dificultad.toFixed(1)}
+                                </span>
+                            </div>
+                        </div>
                       </div>
                       <div className="flex flex-col flex-grow gap-3">
                         <div className="flex gap-1 md:gap-3 items-center text-sm flex-nowrap">
