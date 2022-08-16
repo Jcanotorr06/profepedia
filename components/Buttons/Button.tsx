@@ -10,11 +10,16 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{
 
 const Button = ({children, className, rippleClassName, handleClick, onClick, ...rest}:Props) => {
   return (
-    <Ripples className={rippleClassName} during={500}>
-        <button {...((rest.type !== 'submit' && handleClick !== undefined) ? { onClick:() => handleClick()} :{}) } className={`${className}`} {...rest}>
-            {children}
-        </button>
-    </Ripples>
+    rest.disabled ? 
+      <button {...((rest.type !== 'submit' && handleClick !== undefined) ? { onClick:() => handleClick()} :{}) } className={`${className}`} {...rest}>
+              {children}
+      </button>
+    :
+      <Ripples className={rippleClassName} during={500}>
+          <button {...((rest.type !== 'submit' && handleClick !== undefined) ? { onClick:() => handleClick()} :{}) } className={`${className}`} {...rest}>
+              {children}
+          </button>
+      </Ripples>
   )
 }
 
