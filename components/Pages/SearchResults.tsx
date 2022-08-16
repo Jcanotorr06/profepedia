@@ -38,19 +38,19 @@ const SearchResults:FC = () => {
                                 <div className="surface p-4 rounded-md shadow-md flex justify-between items-center border border-transparent hover:border-black transition-colors">
                                 <div className="flex w-full">
                                     <div className="flex justify-between">
-                                    <div className="flex flex-col justify-center items-center mr-4">
-                                        <div className="text-xs font-bold mb-2 uppercase text-center">
-                                        <Translate label="quality"/>
+                                        <div className="flex flex-col justify-center items-center mr-4">
+                                            <div className="text-xs font-bold mb-2 uppercase text-center">
+                                                <Translate label="quality"/>
+                                            </div>
+                                            <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black ${result.rating === 0 ? 'bg-gray-300' : result.rating < 3 ? 'bg-red-300' : result.rating < 4 ? 'bg-yellow-300' : 'bg-green-400'}`}>
+                                                <div className="score">
+                                                    {result.rating.toFixed(1)}
+                                                </div>
+                                            </div>
+                                            <div className=" text-xs text-center">
+                                                {result.cant_rating} <Translate label="ratings"/>
+                                            </div>
                                         </div>
-                                        <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black ${result.rating === 0 ? 'bg-gray-300' : result.rating < 3 ? 'bg-red-300' : result.rating < 4 ? 'bg-yellow-300' : 'bg-green-400'}`}>
-                                        <div className="score">
-                                            {result.rating.toFixed(1)}
-                                        </div>
-                                        </div>
-                                        <div className=" text-xs text-center">
-                                        {result.cant_rating} <Translate label="ratings"/>
-                                        </div>
-                                    </div>
                                     </div>
                                     <div className="flex flex-col justify-center">
                                     <div className="font-bold text-sm">
