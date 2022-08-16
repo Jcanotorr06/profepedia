@@ -47,7 +47,7 @@ const LoginModal:FC = () => {
         <div className='text-center my-10 muted font-medium'>
           <Translate label="login_message"/>
         </div>
-        <form className="flex flex-col px-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col px-4 gap-6" onSubmit={handleSubmit(onSubmit)}>
           <input 
             type="email" 
             className={`text-sm ${errors.email ? "border-red-400" : ""}`} 
