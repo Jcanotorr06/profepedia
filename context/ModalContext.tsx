@@ -1,12 +1,13 @@
 import { createContext, ReactNode, useContext, useState } from "react"
-import { modalTypes } from "../types/modalTypes"
+import { modalProps, modalTypes } from "../types/modalTypes"
 
 type modalContext = {
     show: boolean,
     toggleModal: () => void,
-    openModal: (type:modalTypes) => void,
+    openModal: (type:modalTypes, props?: modalProps) => void,
     closeModal: () => void,
     modalContent: ReactNode,
+    modalProps: modalProps | null,
     modalType: modalTypes
 }
 
@@ -16,6 +17,7 @@ const modalContextDefault:modalContext = {
     openModal(){},
     closeModal(){},
     modalContent: '',
+    modalProps: null,
     modalType: ''
 }
 
@@ -33,14 +35,16 @@ export function ModalProvider({children}:Props) {
     const [show, setShow] = useState<boolean>(false)
     const [modalContent, setModalContent] = useState<ReactNode>('')
     const [modalType, setModalType] = useState<modalTypes>('')
+    const [modalProps, setModalProps] = useState<modalProps|null>(null)
 
     const toggleModal = () => {
         console.log('MODAL TOGGLE')
         setShow(show => !show)
     }
 
-    const openModal = (type:modalTypes) => {
+    const openModal = (type:modalTypes, props?:modalProps) => {
         setModalType(type)
+        setModalProps(props ? props : null)
         setShow(true)
     }
 
@@ -48,6 +52,7 @@ export function ModalProvider({children}:Props) {
         setShow(false)
         setModalContent('')
         setModalType('')
+        setModalProps(null)
     }
 
     const value:modalContext = {
@@ -56,6 +61,7 @@ export function ModalProvider({children}:Props) {
         openModal,
         closeModal,
         modalContent,
+        modalProps,
         modalType
     }
 
