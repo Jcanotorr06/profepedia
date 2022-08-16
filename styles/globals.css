@@ -348,6 +348,12 @@
     color: #212121;
   }
 
+  select:hover {
+    box-shadow: 0 0 0 0.2rem var(--surface-300);
+    border-color: var(--surface-800);
+    cursor: pointer;
+  }
+
   @media screen and (max-width: 768px) {
     .input-text {
       padding: 0.7rem 1rem;
