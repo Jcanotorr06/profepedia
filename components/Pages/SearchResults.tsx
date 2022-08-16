@@ -21,12 +21,14 @@ const SearchResults:FC = () => {
             <Loading className="h-screen w-screen" active={loading}>
                 <main className="w-full h-full">
                 {success && (
-                    <div className="mt-3 ">
-                    <h1 className="text-xl lg:text-2xl font-medium"><Translate label="results_for"/>: <span className="font-bold">{query}</span></h1>
+                    <div className="mt-3 px-3 lg:px-0">
+                        <h1 className="text-xl lg:text-2xl font-medium"><Translate label="results_for"/>: <span className="font-bold">{query}</span></h1>
                     </div>
                 )}
                 {searchResult.length === 0 ? (
-                    <h1><Translate label="no_results"/></h1>
+                    <div className="my-6 text-center w-full">
+                        <h1 className="text-2xl font-semibold"><Translate label="no_results"/></h1>
+                    </div>
                 ): (
                     <div className="my-6 flex flex-col gap-4">
                     {
