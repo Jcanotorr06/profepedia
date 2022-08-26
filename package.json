@@ -24,7 +24,8 @@
     "react-intl": "^6.0.5",
     "react-loading": "^2.0.3",
     "react-ripples": "^2.2.1",
-    "react-toastify": "^9.0.6"
+    "react-toastify": "^9.0.6",
+    "react-tooltip": "^4.2.21"
   },
   "devDependencies": {
     "@types/node": "18.0.5",
