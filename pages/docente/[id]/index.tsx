@@ -1,9 +1,9 @@
 import { NextPage } from "next"
 import Head from "next/head"
 import { Loading } from "../../../components/Navigation"
-import { useLocale, useModal, useProfessor, useUser } from "../../../context"
+import { useLocale, useModal, useMode, useProfessor, useUser } from "../../../context"
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState, FormEvent } from 'react';
+import { useCallback, useEffect, useState, FormEvent, MouseEvent } from 'react';
 import { formatGroup, formatNombre, isNumeric } from "../../../utils/utils";
 import { IconButton, TextButton } from "../../../components/Buttons";
 import { useIntl } from 'react-intl';
@@ -13,24 +13,28 @@ import { Grade } from "../../../types/grade";
 import { GradeGraph } from "../../../components/GradeGraph";
 import Load from 'react-loading';
 import moment from 'moment'
+import ReactTooltip from "react-tooltip";
 
 
 const Docente:NextPage = () => {
   const { 
     getData, selection, loading, data, 
     ratingBreakdown, reviewCount, reviews,
-    loadMore, loadingMore, sortReviews 
+    loadMore, loadingMore, sortReviews,
+    sendReport 
   } = useProfessor()
   const router = useRouter()
   const intl = useIntl()
   const { locale } = useLocale()
   const { user } = useUser()
   const { openModal, closeModal } = useModal()
+  const { mode } = useMode()
 
   const [id, setId] = useState<number|null>(null)
   const [_loading, setLoading] = useState<boolean>(true)
   const [grades, setGrades] = useState<Grade[]>([])
   const [orderBy, setOrderBy] = useState<string>('popular')
+  const [reportTooltip, setReportTooltip] = useState<boolean>(true)
 
   const titles:any = {
     5: 'awesome',
@@ -76,9 +80,13 @@ const Docente:NextPage = () => {
     setOrderBy(event.currentTarget.value)
     sortReviews(orderBy)
   }
+
+  const handleReport = async (idRating:number, idProfessor: number) => {
+    await sendReport(idRating, idProfessor)
+  }
   
   const handleRateClick = () => {
-    if(!user){
+    if(user){
       openModal("REVIEW", {size: 'full'})
     }else{
       toast.warn(intl.formatMessage({id: 'must_be_logged_in', defaultMessage: 'Debe iniciar sesión.'}))
@@ -173,19 +181,20 @@ const Docente:NextPage = () => {
                       <div className="font-bold border-b border-black px-2 select-none w-full lg:w-1/5"><Translate label="review_count" values={{count: reviewCount}}/></div>
                   </div>
                   <div>
-                    <select name="order" id="" value={orderBy} className="px-6 py-2 surface rounded shadow" onChange={handleOrderBy}>
-                      <option value="popular" selected><Translate label="popular"/></option>
-                      <option value="date"><Translate label="date"/></option>
+                    <select name="order" value={orderBy} className="px-6 py-2 surface rounded shadow" onChange={handleOrderBy}>
+                      <option value="popular">{intl.formatMessage({id: 'popular', defaultMessage: 'Popular'})}</option>
+                      <option value="date">{intl.formatMessage({id: 'date', defaultMessage: 'Fecha'})}</option>
                     </select>
                   </div>
                   {reviews.map((review) =>(
+                    !review.hidden && 
                     <article className="surface px-4 py-4 rounded-md shadow flex flex-col md:flex-row gap-3" key={review.id}>
                       <div className="flex flex-row md:flex-col justify-around">
                         <div className="flex flex-col justify-center items-center mr-4">
                             <div className="text-xs font-bold mb-2 uppercase text-center">
                                 <Translate label="quality"/>
                             </div>
-                            <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black ${review.rating === 0 ? 'bg-gray-300' : review.rating < 3 ? 'bg-red-300' : review.rating < 4 ? 'bg-yellow-300' : 'bg-green-400'}`}>
+                            <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black drop-shadow-sm ${review.rating === 0 ? 'bg-gray-300' : review.rating < 3 ? 'bg-red-300' : review.rating < 4 ? 'bg-yellow-300' : 'bg-green-400'}`}>
                                 <div className="score">
                                     {review.rating.toFixed(1)}
                                 </div>
@@ -195,7 +204,7 @@ const Docente:NextPage = () => {
                             <div className="text-xs font-bold mb-2 uppercase text-center">
                                 <Translate label="difficulty"/>
                             </div>
-                            <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black ground`}>
+                            <div className={`flex items-center justify-center self-center py-3 px-4 mb-3 text-lg font-black ground drop-shadow-sm`}>
                                 <span>
                                     {review.dificultad.toFixed(1)}
                                 </span>
@@ -241,9 +250,28 @@ const Docente:NextPage = () => {
                             </span>
                           </div>
                           <div className="flex flex-grow text-right">
-                            <span className="ml-auto mr-2 text-lg font-bold">
-                              <IconButton icon="bi-flag" className="px-1 rounded-full"/>
+                            <span 
+                              className="ml-auto mr-2 text-lg font-bold" 
+                              {...(review.reported ? {'data-tip':true, 'data-for':`report_tip_${review.id}`} : {})}
+                              onMouseEnter={() => setReportTooltip(true)}
+                              onMouseLeave={() => {
+                                setReportTooltip(false)
+                                setTimeout(() => {
+                                  setReportTooltip(true)
+                                }, 50);
+                              }}>
+                              <IconButton 
+                                icon={review.reported ? 'bi-flag-fill' : 'bi-flag'} 
+                                className="px-1 rounded-full bg-transparent" 
+                                disabled={review.reported ? true : false}
+                                handleClick={() => handleReport(review.id, review.id_docente)}
+                                />
                             </span>
+                            {reportTooltip && review.reported && 
+                              <ReactTooltip id={`report_tip_${review.id}`} effect="solid">
+                                {intl.formatMessage({id: 'already_reported', defaultMessage: 'Este review ya ha sido reportado'})}
+                              </ReactTooltip>
+                            }
                           </div>
                         </div>
                       </div>
@@ -252,7 +280,7 @@ const Docente:NextPage = () => {
                   {
                       loadingMore && 
                       <div className="flex justify-center my-4">
-                        <Load color="#000" type="bubbles"/>
+                        <Load color={mode === 'light' ? "#000" : "#fff"} type="bubbles"/>
                       </div>
                   }
                   {reviews.length < reviewCount && id && (
