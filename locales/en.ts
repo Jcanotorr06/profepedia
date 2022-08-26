@@ -69,7 +69,9 @@ const messages = {
     "filter": "Filter",
     "punctual": "Punctual",
     "no_late_turnins": "No Late Turnins",
-    "rate_professor": "Rate Professor"
+    "rate_professor": "Rate Professor",
+    "results_for": "Search Results For:  {query}",
+    "search_results": "Search results: {query}"
 }
 
 export default messages
