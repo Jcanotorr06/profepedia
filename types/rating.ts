@@ -18,6 +18,9 @@ export type rating = {
     id_user: string,
     likes: number,
     dislikes: number,
+    hidden: boolean,
+    isRemote: boolean,
+    reported: boolean
 }
 
 export type rating_breakdown = {
