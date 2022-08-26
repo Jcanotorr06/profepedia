@@ -23,6 +23,7 @@ type professorContext = {
     loadMore: (professorId: number) => void,
     handleSelection: (selection:any) => void,
     sortReviews: (sortBy:string) => void,
+    sendReport: (idRating: number, professorId: number) => Promise<boolean>
 }
 
 type profesorSelect = {
@@ -58,6 +59,9 @@ const professorContextDefault:professorContext = {
     loadMore: (professorId) => {},
     handleSelection: () => {},
     sortReviews: (sortBy) => {},
+    sendReport: (idRating, professorId) => {
+        return new Promise<boolean>((resolve) => {resolve(true)})
+    },
 }
 
 const ProfessorContext = createContext<professorContext>(professorContextDefault)
@@ -190,6 +194,18 @@ export function ProfessorProvider({children}:Props) {
         }
     }
 
+    const sendReport = async (id_rating:number, professorId:number) => {
+        return new Promise<boolean>(async resolve => {
+            const { data, error } = await supabase.from('Docente_Rating_Report').insert({id_rating})
+            if(data && !error){
+                await getReviews(professorId, reviews.length, 0, reviews.length-1)
+                resolve(true)
+            }else{
+                resolve(false)
+            }
+        })
+    }
+
     const getData = async (professorId: number, professor?:searchResult, refresh?:boolean) => {
         return new Promise<boolean>(async (resolve) => {
             setLoading(true)
@@ -245,7 +261,8 @@ export function ProfessorProvider({children}:Props) {
         getData,
         loadMore,
         handleSelection,
-        sortReviews
+        sortReviews,
+        sendReport
     }
 
     return (
