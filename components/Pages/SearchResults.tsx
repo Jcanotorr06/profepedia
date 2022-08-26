@@ -22,7 +22,7 @@ const SearchResults:FC = () => {
                 <main className="w-full h-full">
                 {success && (
                     <div className="mt-3 px-3 lg:px-0">
-                        <h1 className="text-xl lg:text-2xl font-medium"><Translate label="results_for"/>: <span className="font-bold">{query}</span></h1>
+                        <h1 className="text-xl lg:text-2xl font-medium"><Translate label="results_for" values={{query: <span className="font-bold">{query}</span>}}/></h1>
                     </div>
                 )}
                 {searchResult.length === 0 ? (
