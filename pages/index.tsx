@@ -12,6 +12,12 @@ import Load from 'react-loading';
 import { IconButton } from '../components/Buttons'
 import { GradeBar, GradeGraph } from '../components/GradeGraph'
 import { Grade } from '../types/grade'
+import { useState } from 'react'
+import { ErrorHandler } from '../components/ErrorHandler'
+
+const Bomb = () => {
+  throw new Error('💥Boom💥')
+}
 
 const Home: NextPage = () => {
 
@@ -19,38 +25,7 @@ const Home: NextPage = () => {
     toast.error("Ha ocurrido un error")
   }
 
-  const grades:Grade[] = [
-    {
-      grade: 5,
-      ratio: Math.random(),
-      title: 'awesome',
-      count: 4
-    },
-    {
-      grade: 4,
-      ratio: Math.random(),
-      title: 'good',
-      count: 6
-    },
-    {
-      grade: 3,
-      ratio: Math.random(),
-      title: 'regular',
-      count: 8
-    },
-    {
-      grade: 2,
-      ratio: Math.random(),
-      title: 'bad',
-      count: 3
-    },
-    {
-      grade: 1,
-      ratio: Math.random(),
-      title: 'horrible',
-      count: 3
-    },
-  ]
+  const [explode, setExplode] = useState<boolean>(false)
   return (
     <>
       <Head>
@@ -69,15 +44,15 @@ const Home: NextPage = () => {
           <div>
             <button onClick={() => notify()} className="bg-blue-300 p-3">Toast</button> 
           </div>
-          <div>
-            <Load color='#000' type="bubbles"/>
-          </div>
           <div className=''>
             {/* <div className="flex justify-between w-full rounded-full input-main input shadow-lg border">
               <input type="text" className="px-3 py-10 text-lg rounded-full w-full input_transparent" placeholder="Nombre del profesor" />
             </div> */}
-              <GradeGraph grades={grades}/>
             <div className="flex flex-col gap-4">
+              <button onClick={() => setExplode(ex => !ex)}>Toggle Error</button>
+              <ErrorHandler resetKeys={[explode]}>
+                {explode ? <Bomb/> : 'HELLO'}
+              </ErrorHandler>
             </div>
           </div>
         </div>
