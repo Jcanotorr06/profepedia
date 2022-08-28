@@ -14,10 +14,12 @@ module.exports = withPWA({
   pwa: {
     dest: "public",
     register: true,
+    skipWaiting: true,
+    disable: process.env.NODE_ENV === 'development'
   },
-  /* compiler: {
-    removeConsole: true,
-  }, */
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   reactStrictMode: true,
   swcMinify: true,
 });
