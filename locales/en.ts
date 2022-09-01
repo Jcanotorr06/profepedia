@@ -71,7 +71,8 @@ const messages = {
     "no_late_turnins": "No Late Turnins",
     "rate_professor": "Rate Professor",
     "results_for": "Search Results For:  {query}",
-    "search_results": "Search results: {query}"
+    "search_results": "Search results: {query}",
+    "you_are_rating": "You are reviewing: {name}"
 }
 
 export default messages

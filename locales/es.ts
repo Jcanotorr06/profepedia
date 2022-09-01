@@ -71,7 +71,8 @@ const messages = {
     "no_late_turnins": "No Late Turnins",
     "rate_professor": "Calificar Profesor",
     "results_for": "Resultados de busqueda para: {query}",
-    "search_results": "Resultados de busqueda: {query}"
+    "search_results": "Resultados de busqueda: {query}",
+    "you_are_rating": "Estas calificando a: {name}"
 }
 
 export default messages
