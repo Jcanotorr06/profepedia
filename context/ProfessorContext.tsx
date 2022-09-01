@@ -1,11 +1,14 @@
-import { PostgrestError } from "@supabase/supabase-js";
-import Router from "next/router";
-import { createContext, ReactNode, useContext, useState } from "react"
+/** Import types */
 import { profesorProfile } from "../types/profesorProfile"
 import { likedDisliked, rating, rating_breakdown } from "../types/rating";
+import { course } from "../types/courses";
+import { tag } from "../types/tag";
 import { searchResult } from "../types/searchResult"
-import { supabase } from './../utils/supabaseClient';
+
 import moment from 'moment';
+import { PostgrestError } from "@supabase/supabase-js";
+import { createContext, ReactNode, useContext, useState } from "react"
+import { supabase } from './../utils/supabaseClient';
 
 type professorContext = {
     id: number | null,
@@ -24,6 +27,11 @@ type professorContext = {
     handleSelection: (selection:any) => void,
     sortReviews: (sortBy:string) => void,
     sendReport: (idRating: number, professorId: number) => Promise<boolean>
+
+    courses: course[],
+    tags: tag[],
+    loadingReviewData: boolean,
+    getReviewData: (professorId:number) => void
 }
 
 type profesorSelect = {
@@ -38,6 +46,16 @@ type ratingBreakdownSelect = {
 
 type likedDislikedSelect = {
     data: likedDisliked[],
+    error: PostgrestError | null
+}
+
+type courseSelect = {
+    data: course[],
+    error: PostgrestError | null
+}
+
+type tagSelect = {
+    data: tag[],
     error: PostgrestError | null
 }
 
@@ -62,6 +80,11 @@ const professorContextDefault:professorContext = {
     sendReport: (idRating, professorId) => {
         return new Promise<boolean>((resolve) => {resolve(true)})
     },
+
+    courses: [],
+    tags: [],
+    loadingReviewData: false,
+    getReviewData: (professorId:number) => {}
 }
 
 const ProfessorContext = createContext<professorContext>(professorContextDefault)
@@ -86,6 +109,9 @@ export function ProfessorProvider({children}:Props) {
     const [ratingBreakdown, setRatingBreakdown] = useState<rating_breakdown[]>([])
     const [loadingMore, setLoadingMore] = useState<boolean>(false)
     const [likedDisliked, setLikedDisliked] = useState<likedDisliked[]>([])
+    const [courses, setCourses] = useState<course[]>([])
+    const [tags, setTags] = useState<tag[]>([])
+    const [loadingReviewData, setLoadingReviewData] = useState<boolean>(false)
 
     const handleTest = (professor:searchResult) => {
         return new Promise<void>((resolve) => {
@@ -246,6 +272,44 @@ export function ProfessorProvider({children}:Props) {
         })
     }
 
+    const getCourses = async (professorId:number) => {
+        return new Promise<boolean>(async resolve => {
+            const { data, error } = await supabase.from("asignaturas_docentes").select("*").eq("id_docente", professorId) as courseSelect
+            if(data && !error){
+                setCourses(data)
+                resolve(true)
+                return
+            }
+            resolve(false)
+            return
+        })
+    }
+
+    const getTags = async () => {
+        return new Promise<boolean>(async resolve => {
+            const { data, error } = await supabase.from("Tags_Docentes").select("*") as tagSelect
+            if(data && !error){
+                setTags(data)
+                resolve(true)
+                return
+            }
+            resolve(false)
+            return
+        })
+    }
+
+    const getReviewData = async (professorId:number) => {
+        setLoadingReviewData(true)
+        const gotCourses = await getCourses(professorId)
+        const gotTags = await getTags()
+
+        if(gotCourses && gotTags){
+            setLoadingReviewData(false)
+        }else{
+            console.log("💥💥💥There was an error💥💥💥")
+        }
+    }
+
     const value:professorContext = {
         id,
         selection,
@@ -262,7 +326,12 @@ export function ProfessorProvider({children}:Props) {
         loadMore,
         handleSelection,
         sortReviews,
-        sendReport
+        sendReport,
+
+        courses,
+        tags,
+        loadingReviewData,
+        getReviewData
     }
 
     return (
