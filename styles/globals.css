@@ -281,8 +281,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
-  input, .input {
+input:not([type=checkbox])
+  input:not([type="radio"]), .input {
     font-size: 1rem;
     color: #495057;
     background: var(--surface-ground);
