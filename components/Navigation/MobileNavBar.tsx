@@ -206,12 +206,12 @@ const MobileNavBar = () => {
                 className="w-full"
                 variants={liVariants}>
                   <form name="nav_search_form" className="flex grow-1 justify-center w-full" onSubmit={formHandleSubmit(handleSubmit)}>
-                      <div className="flex w-full text-sm input input-text gap-2">
-                        <IconButton icon="bi-search" type="submit" className="text-lg mr-3 px-1 rounded-full" rippleClassName="rounded-full"/>
+                      <div className="flex w-full text-sm input-text gap-2">
+                        <IconButton icon="bi-search" type="submit" className="text-lg mr-3 px-2 rounded-full" rippleClassName="rounded-full"/>
                         <input 
                           type="text"
                           id="nav_search"
-                          className="flex-1 border-none "
+                          className="flex-1 border-none text-input"
                           autoComplete="search_professor"
                           placeholder={intl.formatMessage({id: 'search_placeholder', defaultMessage: 'Buscar profesor'})}
                           {...register("prof", {required: true, minLength: 2, maxLength: 20})}/>

@@ -50,7 +50,7 @@ const LoginModal:FC = () => {
         <form className="flex flex-col px-4 gap-6" onSubmit={handleSubmit(onSubmit)}>
           <input 
             type="email" 
-            className={`text-sm ${errors.email ? "border-red-400" : ""}`} 
+            className={`text-sm text-input ${errors.email ? "border-red-400" : ""}`} 
             placeholder={intl.formatMessage({id: "login_email_ph", defaultMessage: "Dirección de correo universitaria"})}
             {...register("email", {required: true, pattern: {value: /^[a-zA-Z]{1,15}\.{1}[a-zA-Z]{1,15}\d?@utp.ac.pa$/g, message: 'invalid_email'}})} />
             {errors.email?.message && <span className='text-xs font-semibold'><Translate label={errors.email.message} className="text-xs text-red-400 font-semibold"/>&nbsp;</span>}

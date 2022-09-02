@@ -76,12 +76,12 @@ const NavBar = () => {
         </Link>
       </div>
       <form name="nav_search_form" className="flex grow-1 px-8 justify-center" onSubmit={formHandleSubmit(handleSubmit)}>
-          <div className="flex w-full max-w-xl text-sm input input-text gap-2">
-            <IconButton icon="bi-search" type="submit" className="text-lg mr-3 px-1 rounded-full" rippleClassName="rounded-full"/>
+          <div className="flex w-full max-w-xl text-sm input-text gap-2 ground rounded-full">
+            <IconButton icon="bi-search" type="submit" className="text-lg mr-3 px-2 rounded-full" rippleClassName="rounded-full"/>
             <input 
               type="text"
               id="nav_search"
-              className="flex-1 border-none "
+              className="flex-1 border-none text-input"
               autoComplete="search_professor"
               placeholder={intl.formatMessage({id: 'search_placeholder', defaultMessage: 'Buscar profesor'})}
               {...register("prof", {required: true, minLength: 2, maxLength: 20, pattern: {value: /^[A-Za-z]+$/, message: "only_letters"}})}/>
@@ -91,7 +91,7 @@ const NavBar = () => {
         <div className="col-span-1">
           <TextButton 
             text={!user ? "login" : "logout"} 
-            className="button-primary button-raised px-8 py-2 rounded-full font-bold text-sm xl:text-base" 
+            className="btn btn-success button-raised px-8 py-2 rounded-full font-bold text-sm xl:text-md" 
             rippleClassName="rounded-full"
             handleClick={() => !user ? openModal("LOGIN") : handleLogout()}/>
         </div>
