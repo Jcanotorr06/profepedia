@@ -78,7 +78,7 @@ const Docente:NextPage = () => {
 
   const handleOrderBy = (event: FormEvent<HTMLSelectElement>) => {
     setOrderBy(event.currentTarget.value)
-    sortReviews(orderBy)
+    sortReviews(event.currentTarget.value)
   }
 
   const handleReport = async (idRating:number, idProfessor: number) => {
@@ -156,7 +156,7 @@ const Docente:NextPage = () => {
                     <TextButton 
                       handleClick={() => handleRateClick()} 
                       text="rate_professor" 
-                      className={`px-4 py-3 font-bold button-primary rounded-full w-full ${user ? '' : 'disabled'}`}
+                      className={`px-4 py-3 font-bold btn rounded-full w-full ${user ? (reviews.find(r => r.id_user === user.id) ? 'btn-disabled' : 'btn-success') : 'btn-disabled'}`}
                       rippleClassName="rounded-full w-full"/>
                   </div>
                 </div>
@@ -226,7 +226,7 @@ const Docente:NextPage = () => {
                         <div className="flex gap-3 text-sm flex-wrap">
                           <div><Translate label="is_credit"/><Translate label={review.isCredit ? 'yes':'no'} className="font-bold"/></div>
                           <div><Translate label="attendance_mandatory"/><Translate label={review.attendanceMandatory ? 'mandatory':'optional'} className="font-bold"/></div>
-                          <div><Translate label="would_take_again_tag"/><Translate label={review.isCredit ? 'yes':'no'} className="font-bold"/></div>
+                          <div><Translate label="would_take_again_tag"/><Translate label={review.wouldTakeAgain ? 'yes':'no'} className="font-bold"/></div>
                           <div><Translate label="grade"/><span className="font-bold">{review.nota}</span></div>
                           <div><Translate label="use_textbooks"/><Translate label={review.isCredit ? 'yes':'no'} className="font-bold"/></div>
                         </div>
