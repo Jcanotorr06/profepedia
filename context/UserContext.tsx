@@ -66,6 +66,10 @@ export function UserProvider({children}:Props) {
     }
 
     useEffect(() => {
+        checkUser()
+    }, [])
+
+    useEffect(() => {
         const { data } = supabase.auth.onAuthStateChange((event, session) => {
             handleAuthChange(event, session)
             console.log(session)
