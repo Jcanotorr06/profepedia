@@ -1,6 +1,6 @@
 /** Import types */
 import { profesorProfile } from "../types/profesorProfile"
-import { likedDisliked, rating, rating_breakdown } from "../types/rating";
+import { likedDisliked, newRating, rating, rating_breakdown } from "../types/rating";
 import { course } from "../types/courses";
 import { tag } from "../types/tag";
 import { searchResult } from "../types/searchResult"
@@ -32,6 +32,7 @@ type professorContext = {
     tags: tag[],
     loadingReviewData: boolean,
     getReviewData: (professorId:number) => void
+    sendReview: (payload:newRating, professorId:number) => Promise<boolean>
 }
 
 type profesorSelect = {
@@ -84,7 +85,10 @@ const professorContextDefault:professorContext = {
     courses: [],
     tags: [],
     loadingReviewData: false,
-    getReviewData: (professorId:number) => {}
+    getReviewData: (professorId:number) => {},
+    sendReview(payload, professorId) {
+        return new Promise<boolean>(resolve => {resolve(true)})
+    },
 }
 
 const ProfessorContext = createContext<professorContext>(professorContextDefault)
@@ -152,7 +156,7 @@ export function ProfessorProvider({children}:Props) {
     const sortReviews = (sortBy:string) => {
         switch(sortBy){
             case 'date':
-                setReviews(rev => rev.sort((a,b) => moment(a.created_at).diff(moment(b.created_at))))
+                setReviews(rev => rev.sort((a,b) => moment(b.created_at).diff(moment(a.created_at))))
                 break;
             default:
                 setReviews(rev => rev.sort((a,b) => a.likes-b.likes))
@@ -244,7 +248,7 @@ export function ProfessorProvider({children}:Props) {
                     setId(professorId)
                 }
             }
-            else if(data && data.id === professorId){
+            else if(data && data.id === professorId && !refresh){
                 console.log('SAME PROFESSOR, DO NOT REFETCH')
             }
             else{
@@ -310,6 +314,20 @@ export function ProfessorProvider({children}:Props) {
         }
     }
 
+    const sendReview = async (payload:newRating, professorId:number) => {
+        return new Promise<boolean>(async resolve => {
+            const { data, error } = await supabase.from("Rating").insert({...payload})
+            if(data && !error) {
+                await getData(professorId, undefined, true)
+                resolve(true)
+                return
+            }else{
+                resolve(false)
+                return
+            }
+        })
+    }
+
     const value:professorContext = {
         id,
         selection,
@@ -331,7 +349,8 @@ export function ProfessorProvider({children}:Props) {
         courses,
         tags,
         loadingReviewData,
-        getReviewData
+        getReviewData,
+        sendReview
     }
 
     return (
