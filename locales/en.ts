@@ -37,7 +37,7 @@ const messages = {
     "review_count":"Review Count: {count}",
     "popular":"Popularity",
     "date":"Most Recent",
-    "is_credit":"Fundamental",
+    "is_credit":"Obligatory: ",
     "attendance_mandatory":"Attendance: ",
     "would_take_again_tag":"Would Take Again: ",
     "grade":"Grade: ",
@@ -72,7 +72,45 @@ const messages = {
     "rate_professor": "Rate Professor",
     "results_for": "Search Results For:  {query}",
     "search_results": "Search results: {query}",
-    "you_are_rating": "You are reviewing: {name}"
+    "you_are_rating": "You are reviewing: {name}",
+
+    "things_to_remember": "A couple things to remember: ",
+    "be_honest": "Be Honest.",
+    "be_honest_paragraph": "It's not fair to other students or to professors to lie in your ratings. Be honest about your experiences and everyone will benefit.",
+    "be_nice": "Be Nice.",
+    "be_nice_paragraph": "Professors are human too. We do not accept ratings that use offensive terms or could be perceived as slander.",
+    "be_safe": "Be Safe",
+    "be_safe_paragraph": "Do not give personal information away. That means: naes of people other than the professor, phone numbers, emails, locations, etc.",
+
+    "compliance_disclaimer": "Anything not in compliance with our community guidelines wil be removed from the website.",
+
+    "review_first": "First, some basic questions.",
+    "review_course_question": "What class did you take with this professor?",
+    "review_course_placeholder": "Pick your class",
+    "review_course_description": "Select the subject | classroom you take with this professor",
+    "review_remote_question": "Did you take this class online or in person?",
+    "online": "Online",
+    "in_person": "In Person",
+    "review_grade_question": "What grade did you receive in this class?",
+    "review_grade_placeholder": "Pick your grade",
+    
+    "review_now": "Now, your rating",
+    "review_rating_question": "In a scale from 1 to 5, How would you rate this professor?",
+    "review_difficulty_question": "In a scale from 1 to 5, How difficult would you say were their classes?",
+    "review_tags_question": "Pick up to 4 tags you feel best describe this professor.",
+    
+    "review_next": "Finnaly, your thoughts",
+    "review_review_question": "Tell us about your experiences with this professor",
+    "review_review_placeholder": "Write your message here.",
+    "review_again_question": "Would you take a class with this professor again?",
+    "review_textbooks_question": "Would you say the use of textbooks was important in this class?",
+    "review_attendance_question": "Would you say attendance was important in this class?",
+    "review_credit_question": "Was ths an obligatory subject in your study plan?",
+
+    "review_terms_and_conditions": "Click here to indicate you have read and agree with our {link}.",
+    "terms_and_conditions": "Terms and Conditions",
+    "review_success_title": "Thank you for your rating!",
+    "review_success_message": "We appreciate your contribution to the community!"
 }
 
 export default messages
