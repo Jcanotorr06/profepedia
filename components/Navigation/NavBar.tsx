@@ -91,7 +91,7 @@ const NavBar = () => {
         <div className="col-span-1">
           <TextButton 
             text={!user ? "login" : "logout"} 
-            className="btn btn-success button-raised px-8 py-2 rounded-full font-bold text-sm xl:text-md" 
+            className="btn btn-success btn-md button-raised px-8 rounded-full font-bold text-sm xl:text-md" 
             rippleClassName="rounded-full"
             handleClick={() => !user ? openModal("LOGIN") : handleLogout()}/>
         </div>
