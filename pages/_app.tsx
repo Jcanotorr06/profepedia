@@ -41,11 +41,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           <LocaleProvider>
             <ModalProvider>
               <NextNProgress height={6} color="#6C4BDA"/>
-              <TopMessage/>
               <ProfessorProvider>
                 <SearchProvider>
                   <Toast/>
                   <Modal/>
+                  <TopMessage/>
                   <DefaultLayout>
                     <Component {...pageProps}/>
                   </DefaultLayout>
