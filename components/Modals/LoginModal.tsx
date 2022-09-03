@@ -48,11 +48,14 @@ const LoginModal:FC = () => {
           <Translate label="login_message"/>
         </div>
         <form className="flex flex-col px-4 gap-6" onSubmit={handleSubmit(onSubmit)}>
-          <input 
-            type="email" 
-            className={`text-sm text-input ${errors.email ? "border-red-400" : ""}`} 
-            placeholder={intl.formatMessage({id: "login_email_ph", defaultMessage: "Dirección de correo universitaria"})}
-            {...register("email", {required: true, pattern: {value: /^[a-zA-Z]{1,15}\.{1}[a-zA-Z]{1,15}\d?@utp.ac.pa$/g, message: 'invalid_email'}})} />
+          <div className="input-text">
+            <input 
+              type="email" 
+              className={`text-sm text-input w-full py-3 ${errors.email ? "border-red-400" : ""}`} 
+              style={{padding: '0.75rem 0'}}
+              placeholder={intl.formatMessage({id: "login_email_ph", defaultMessage: "Dirección de correo universitaria"})}
+              {...register("email", {required: true, pattern: {value: /^[a-zA-Z]{1,15}\.{1}[a-zA-Z]{1,15}\d?@utp.ac.pa$/g, message: 'invalid_email'}})} />
+          </div>
             {errors.email?.message && <span className='text-xs font-semibold'><Translate label={errors.email.message} className="text-xs text-red-400 font-semibold"/>&nbsp;</span>}
           <TextButton
             text="send_auth_email"
