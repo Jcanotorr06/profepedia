@@ -34,3 +34,22 @@ export type likedDisliked = {
     id_usuario: string,
     likeDisliked: "like"|"dislike"
 }
+
+export type newRating = {
+    id_docente: number,
+    id_asignatura: number,
+    rating: number,
+    dificultad: number,
+    wouldTakeAgain: boolean,
+    isCredit: boolean,
+    useTextbooks: boolean,
+    attMandatory: boolean,
+    nota: string | null,
+    review: string,
+    id_tag1: number | null,
+    id_tag2: number | null,
+    id_tag3: number | null,
+    id_user:string,
+    hidden: boolean,
+    isRemote: boolean
+}
