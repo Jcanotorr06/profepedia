@@ -32,7 +32,7 @@ type professorContext = {
     tags: tag[],
     loadingReviewData: boolean,
     getReviewData: (professorId:number) => void
-    sendReview: (payload:newRating, professorId:number) => Promise<boolean>
+    sendReview: (payload:newRating, professorId:number) => Promise<boolean|string>
 }
 
 type profesorSelect = {
@@ -314,15 +314,36 @@ export function ProfessorProvider({children}:Props) {
         }
     }
 
-    const sendReview = async (payload:newRating, professorId:number) => {
+    const moderation = async (review:string) => {
         return new Promise<boolean>(async resolve => {
-            const { data, error } = await supabase.from("Rating").insert({...payload})
-            if(data && !error) {
-                await getData(professorId, undefined, true)
-                resolve(true)
-                return
+            let res = await fetch('/api/moderation', {
+                method: 'POST',
+                headers: new Headers({ 'Content-Type': 'application/json' }),
+                credentials: 'same-origin',
+                body: JSON.stringify({ input: review })
+            })
+            let flagged = await res.json()
+            console.log('Flagged: ',flagged)
+            resolve(flagged)
+            return
+        })
+    }
+
+    const sendReview = async (payload:newRating, professorId:number) => {
+        return new Promise<boolean | string>(async resolve => {
+            let isFlagged = await moderation(payload.review)
+            if(!isFlagged) {
+                const { data, error } = await supabase.from("Rating").insert({...payload})
+                if(data && !error) {
+                    await getData(professorId, undefined, true)
+                    resolve(true)
+                    return
+                }else{
+                    resolve(false)
+                    return
+                }
             }else{
-                resolve(false)
+                resolve('review_flagged')
                 return
             }
         })

@@ -116,10 +116,14 @@ const ReviewModal = () => {
             
             console.log(payload, isValid)
             let res = await sendReview(payload, data.id)
-            if(res){            
-                openModal("REVIEW_SUCCESS")
+            if(typeof res === 'string'){
+                toast.error(res)            
             }else{
-                toast.error("There was an error")
+                if(res){
+                    openModal("REVIEW_SUCCESS")
+                }else {
+                    toast.error("There was an error")
+                }
             }
             setLoadingSendReview(false)
         }
