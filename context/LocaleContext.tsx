@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react"
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { IntlProvider } from 'react-intl'
 import { ES, EN } from '../locales'
 
@@ -30,19 +30,36 @@ export function LocaleProvider({children}:Props) {
     const [locale, setLocale] = useState<"es"|"en">("es")
     const [messages, setMessages] = useState<any>(ES)
 
+    useEffect(() => {
+        let storedLocale = localStorage.getItem("locale")
+        if(storedLocale && (storedLocale === 'es' || storedLocale === 'en')){
+            setLocale(storedLocale)
+            if(storedLocale === "en"){
+                setMessages(EN)
+            }else{
+                setMessages(ES)
+            }
+        }else{
+            localStorage.setItem("locale", "es")
+        }
+    }, [])
+
     const changeLocale = (lang:'es'|'en') => {
         switch (lang) {
             case 'es':
                 setLocale('es')
                 setMessages(ES)
+                localStorage.setItem("locale", "es")
                 break;
             case 'en':
                 setLocale('en')
                 setMessages(EN)
+                localStorage.setItem("locale", "en")
                 break;
             default:
                 setLocale('es')
                 setMessages(ES)
+                localStorage.setItem("locale", "es")
                 break;
         }
     }
