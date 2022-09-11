@@ -127,7 +127,7 @@
       overflow-x: hidden;
   }
 
-  header, footer {
+  header {
     z-index: 11;
     position: relative;
   }
