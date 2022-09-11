@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react"
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 
 type modeContext = {
     mode: "light" | "dark",
@@ -25,8 +25,18 @@ type Props = {
 export function ModeProvider({children}:Props) {
     const [mode, setMode] = useState<"light"|"dark">("light")
 
+    useEffect(() => {
+        let storedMode = localStorage.getItem("mode")
+        if(storedMode && (storedMode === 'light' || storedMode === 'dark')){
+            setMode(storedMode)
+        }else{
+            localStorage.setItem("mode", "light")
+        }
+    }, [])
+
     const swapMode = () =>{
         setMode(mode === 'light' ? 'dark' : 'light')
+        localStorage.setItem("mode", localStorage.getItem("mode") === 'light' ? "dark" : "light")
         console.log(mode)
     }
 
