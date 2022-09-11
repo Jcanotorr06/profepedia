@@ -9,3 +9,15 @@ export type searchResult = {
     rating: number,
     unidad: string | null | undefined
 }
+
+export type searchSuggestion = {
+    id: number,
+    nombre: string,
+    email: string | null | undefined,
+    unidad: string | null | undefined,
+    departamento: string | null | undefined,
+    foto: string,
+    email2: string | null | undefined,
+    email3: string | null | undefined,
+    id_universidad: number
+}
