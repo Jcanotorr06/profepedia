@@ -18,7 +18,7 @@ const Footer = () => {
           <Link href="/about" scroll={false}>
             <a className="link link-hover text-neutral-content">About us</a> 
           </Link>
-          <Link href="/contancto" scroll={false}>
+          <Link href="/contacto" scroll={false}>
             <a className="link link-hover text-neutral-content">Contact</a> 
           </Link>
           <Link href="/faq" scroll={false}>
