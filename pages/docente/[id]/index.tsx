@@ -52,7 +52,7 @@ const Docente:NextPage = () => {
   }, [router.query.id])
 
   useEffect(() => {
-    if(id && !data && !loading){
+    if(id && (!data || (data && data.id !== id)) && !loading){
       console.log(id)
       getData(id)
     }
@@ -74,7 +74,7 @@ const Docente:NextPage = () => {
     setTimeout(() => {
       setLoading(false)
     }, 1000);
-  })
+  }, [])
 
   const handleOrderBy = (event: FormEvent<HTMLSelectElement>) => {
     setOrderBy(event.currentTarget.value)
