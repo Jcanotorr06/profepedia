@@ -1,11 +1,11 @@
 {
     "theme_color": "#ff6a81",
     "background_color": "#ffffff",
-    "display": "browser",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Profepedia",
-    "short_name": "Profe",
+    "short_name": "Profepedia",
     "description": "Rate and review your professors",
     "icons": [
         {
