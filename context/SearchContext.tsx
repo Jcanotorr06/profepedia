@@ -1,7 +1,8 @@
 import { createContext, ReactNode, useContext, useState, useEffect } from "react"
 import { useRouter } from 'next/router';
 import { supabase } from './../utils/supabaseClient';
-import { searchResult } from "../types/searchResult";
+import { searchResult, searchSuggestion } from "../types/searchResult";
+import { PostgrestError } from "@supabase/supabase-js";
 
 
 type searchContext = {
@@ -14,7 +15,14 @@ type searchContext = {
     failure: boolean,
     handleSearch: (query:string) => void,
     loadMore: () => void,
-    loadingMore: boolean
+    loadingMore: boolean,
+    searchSuggestions: searchSuggestion[],
+    getSearchSuggestions: (q:string) => Promise<boolean>
+}
+
+type SearchSuggestionResult = {
+    data: searchSuggestion[],
+    error: PostgrestError | null
 }
 
 const searchContextDefault:searchContext = {
@@ -27,7 +35,10 @@ const searchContextDefault:searchContext = {
     failure: false,
     handleSearch: (query:string) => {},
     loadMore: () => {},
-    loadingMore: false
+    loadingMore: false,
+
+    searchSuggestions: [],
+    getSearchSuggestions: (q:string) => new Promise<boolean>(resolve => resolve(true)),
 }
 
 const SearchContext = createContext<searchContext>(searchContextDefault)
@@ -49,6 +60,7 @@ export function SearchProvider({children}:Props) {
     const [failure, setFailure] = useState<boolean>(false)
     const [amount, setAmount] = useState<number>(0)
     const [loadingMore, setLoadingMore] = useState<boolean>(false)
+    const [searchSuggestions, setSearchSuggestions] = useState<searchSuggestion[]>([])
     const router = useRouter()
 
     useEffect(() => {
@@ -68,6 +80,21 @@ export function SearchProvider({children}:Props) {
             data,
             count
         }
+    }
+
+    const getSearchSuggestions = async(q:string) => {
+        return new Promise<boolean>(async resolve => {
+            const { data, error } = await supabase.rpc("search_docente_limited", {"name": q}) as SearchSuggestionResult
+            if(data && !error){
+                setSearchSuggestions(data)
+                resolve(true)
+                return
+            }else{
+                setSearchSuggestions([])
+                resolve(false)
+                return
+            }
+        })
     }
 
     const loadMore = async () => {
@@ -125,7 +152,10 @@ export function SearchProvider({children}:Props) {
         failure,
         handleSearch,
         loadMore,
-        loadingMore
+        loadingMore,
+
+        searchSuggestions,
+        getSearchSuggestions
     }
 
     return (
