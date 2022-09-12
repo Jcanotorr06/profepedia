@@ -40,9 +40,9 @@ const Footer = () => {
         <section>
           <span className="footer-title text-neutral-content">Social</span>
           <div className="grid grid-flow-col gap-4">
-            <a href="https://www.instagram.com/myprofepedia/" target="_blank" rel="noopener noreferrer"><i className="bi bi-instagram text-neutral-content"/></a>
-            <a href="https://medium.com/@myprofepedia" target="_blank" rel="noopener noreferrer"><i className="bi bi-medium text-neutral-content"/></a>
-            <a href="https://github.com/Jcanotorr06/profepedia" target="_blank" rel="noopener noreferrer"><i className="bi bi-github text-neutral-content"/></a>
+            <a href="https://www.instagram.com/myprofepedia/" target="_blank" rel="noopener noreferrer" title="Instagram"><i className="bi bi-instagram text-neutral-content"/></a>
+            <a href="https://medium.com/@myprofepedia" target="_blank" rel="noopener noreferrer" title="Medium"><i className="bi bi-medium text-neutral-content"/></a>
+            <a href="https://github.com/Jcanotorr06/profepedia" target="_blank" rel="noopener noreferrer" title="Github"><i className="bi bi-github text-neutral-content"/></a>
           </div>
         </section>
       </footer>
