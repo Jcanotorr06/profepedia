@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { ReactNode } from "react"
 import { Modal } from "../components/Modals"
 import { Footer, MobileNavBar, NavBar } from "../components/Navigation"
@@ -10,6 +11,7 @@ type Props = {
 const DefaultLayout = ({children}:Props) => {
 
     const { mode } = useMode()
+    const router = useRouter()
 
     return (
     <>
@@ -18,7 +20,7 @@ const DefaultLayout = ({children}:Props) => {
                 <NavBar/>
                 <MobileNavBar/>
             </header>
-            <main className="py-4 container mx-auto grow">
+            <main className={`grow ${router.route !== '/' && 'py-4 mx-auto container'}`}>
                 {children}
             </main>
             <Footer/>
