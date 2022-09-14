@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
 
 
 class MyDocument extends Document {
@@ -27,16 +26,6 @@ class MyDocument extends Document {
             <meta property="og:url" content="https://profepedia.vercel.app" />
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:site" content="@spoofy507"/>
-
-            {/* Google tag (gtag.js) */}
-            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-F32L3CFGJV"></Script>
-            <Script id="datalayer">
-              {`window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-F32L3CFGJV');`}
-            </Script>
           </Head>
           <body>
             <Main />

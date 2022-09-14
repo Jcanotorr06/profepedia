@@ -4,6 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'react-toastify/dist/ReactToastify.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import Script from 'next/script'
 import NextNProgress from 'nextjs-progressbar'
 import { useEffect } from 'react';
 import { UserProvider } from '../context/UserContext'
@@ -36,6 +37,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="keywords" content="Profesor, Rating, Review, Opinion, Social, UTP, University, Universidad"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       </Head>
+      {/* Google tag (gtag.js) */}
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-F32L3CFGJV" strategy="afterInteractive"/>
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-F32L3CFGJV');`}
+      </Script>
       <UserProvider>
         <ModeProvider>
           <LocaleProvider>
