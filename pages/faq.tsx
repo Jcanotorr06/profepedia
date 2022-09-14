@@ -64,7 +64,6 @@ const FAQ:NextPage = () => {
     <>
       <Head>
         <title>{intl.formatMessage({id: 'faq', defaultMessage: 'FAQ'})} | Profepedia</title>
-        <meta name="description" content="Encuentra el mejor profesor" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

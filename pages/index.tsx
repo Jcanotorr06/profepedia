@@ -24,7 +24,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Profepedia</title>
-        <meta name="description" content="Encuentra el mejor profesor" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

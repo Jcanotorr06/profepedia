@@ -37,7 +37,6 @@ const Search:NextPage = () => {
           <>
             <Head>
               <title>{intl.formatMessage({id: 'search_results', defaultMessage: `Resultados de Busqueda: ${query}`}, {query: query})} | Profepedia</title>
-              <meta name="description" content="Encuentra el mejor profesor" />
               <link rel="icon" href="/favicon.ico" />
             </Head>
             <SearchResults/>
@@ -46,7 +45,6 @@ const Search:NextPage = () => {
           <>
             <Head>
               <title>{intl.formatMessage({id: 'search_page', defaultMessage: "Busqueda"})} | Profepedia</title>
-              <meta name="description" content="Encuentra el mejor profesor" />
               <link rel="icon" href="/favicon.ico" />
             </Head>
             <SearchPage/>

@@ -14,7 +14,6 @@ const About:NextPage = () => {
     <>
       <Head>
         <title>{intl.formatMessage({id: 'about', defaultMessage: 'Acerca de'})} | Profepedia</title>
-        <meta name="description" content="Encuentra el mejor profesor" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full min-h-full flex flex-col gap-5">

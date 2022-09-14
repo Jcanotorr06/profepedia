@@ -9,7 +9,6 @@ const OfflinePage:NextPage = () => {
       <>
         <Head>
           <title>Offline | Profepedia</title>
-          <meta name="description" content="Conectate a internet para acceder a la pagina" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className="w-screen h-screen overflow-hidden flex justify-center items-center">
