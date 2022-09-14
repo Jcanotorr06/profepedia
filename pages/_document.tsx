@@ -17,7 +17,15 @@ class MyDocument extends Document {
               rel="stylesheet"
             />
             <meta name="theme-color" content="#fff" />
+            <meta name="title" content="Profepedia"/>
             <meta name="description" content="Profepedia. Help other students by rating and reviewing your professors" />
+            <meta property="og:title" content="Profepedia" />
+            <meta property="og:type" content="website" />
+            <meta name="og:description" content="Help other students by rating and reviewing your professors"/>
+            <meta property="og:image" content="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=50" />
+            <meta property="og:url" content="https://profepedia.vercel.app" />
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:site" content="@spoofy507"/>
           </Head>
           <body>
             <Main />
