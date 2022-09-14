@@ -112,7 +112,15 @@ const messages = {
     "review_terms_and_conditions": "Haz clic aquí para indicar que haz leido y aceptas nuestros {link}.",
     "terms_and_conditions": "Terminos y Condiciones",
     "review_success_title": "¡Gracias por compartir tu opinión!",
-    "review_success_message": "Muchas gracias por contribuir a la comunidad."
+    "review_success_message": "Muchas gracias por contribuir a la comunidad.",
+
+    "landing_title": "Encuentra tu Profesor Y Comparte tú Opinion",
+    "landing_description": "Cuentanos acerca de tus experiencias con los profesores y ayuda a otros estudiantes a tomar la mejor desicion.",
+    "loading": "Cargando",
+    "no_results": "No se han encontrado resultados",
+    "main_search_ph": "Ingresa el nombre de tu profesor",
+    "how_it_works": "COMO FUNCIONA",
+    "how_it_works_description": "Profepedia es la primera plataforma para calificar publicamente a los profesores en Panamá."
 }
 
 export default messages

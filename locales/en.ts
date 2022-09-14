@@ -110,7 +110,15 @@ const messages = {
     "review_terms_and_conditions": "Click here to indicate you have read and agree with our {link}.",
     "terms_and_conditions": "Terms and Conditions",
     "review_success_title": "Thank you for your rating!",
-    "review_success_message": "We appreciate your contribution to the community!"
+    "review_success_message": "We appreciate your contribution to the community!",
+
+    "landing_title": "Find Your Professor And Share Your Oppinion",
+    "landing_description": "Tell us about your experiences with teachers and help other students to make the best decision.",
+    "loading": "Loading",
+    "no_results": "No results found",
+    "main_search_ph": "Enter your professor's name",
+    "how_it_works": "HOW DOES IT WORK",
+    "how_it_works_description": "Profepedia is the first platform were you can publicly rate teachers in Panama."
 }
 
 export default messages
