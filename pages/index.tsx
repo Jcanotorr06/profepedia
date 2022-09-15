@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Profepedia</title>
+        <title>Profepedia | Califica a Tus Profesores</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
                   <div className="absolute -bottom-3 -right-3 h-6 w-6 bg-surface border-red-300 border-2"/>
                   <div className="absolute -top-3 -right-3 h-6 w-6 bg-surface border-red-300 border-2"/>
 
-                  <i className="bi bi-github text-3xl"/>
+                  <i className="bi bi-github text-3xl text-icon"/>
                   <h3 className="font-bold text-3xl">Learn through hands on lessons right through Figma</h3>
                   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id, reiciendis! Iusto molestiae doloribus eveniet quibusdam quod expedita illum similique, facere nostrum ea laudantium mollitia vel laborum omnis soluta necessitatibus magnam!</p>
                 </article>
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
                   <div className="absolute -bottom-3 -right-3 h-6 w-6 bg-surface border-green-300 border-2"/>
                   <div className="absolute -top-3 -right-3 h-6 w-6 bg-surface border-green-300 border-2"/>
 
-                  <i className="bi bi-github text-3xl"/>
+                  <i className="bi bi-github text-3xl text-icon"/>
                   <h3 className="font-bold text-3xl">Learn through hands on lessons right through Figma</h3>
                   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id, reiciendis! Iusto molestiae doloribus eveniet quibusdam quod expedita illum similique, facere nostrum ea laudantium mollitia vel laborum omnis soluta necessitatibus magnam!</p>
                 </article>
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
                   <div className="absolute -bottom-3 -right-3 h-6 w-6 bg-surface border-blue-300 border-2"/>
                   <div className="absolute -top-3 -right-3 h-6 w-6 bg-surface border-blue-300 border-2"/>
 
-                  <i className="bi bi-github text-3xl"/>
+                  <i className="bi bi-github text-3xl text-icon"/>
                   <h3 className="font-bold text-3xl">Learn through hands on lessons right through Figma</h3>
                   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id, reiciendis! Iusto molestiae doloribus eveniet quibusdam quod expedita illum similique, facere nostrum ea laudantium mollitia vel laborum omnis soluta necessitatibus magnam!</p>
                 </article>
