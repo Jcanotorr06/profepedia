@@ -23,7 +23,7 @@ class MyDocument extends Document {
             <meta property="og:type" content="website" />
             <meta name="og:description" content="Con más de 7 mil profesores, Profepedia es a mejor fuente de calificaciones de profesores basada en los comentarios de los estudiantes."/>
             {/* <meta property="og:image" content="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=50" /> */}
-            <meta property="og:url" content="https://www.profepedia.xyz" />
+            <meta property="og:url" content="https://profepedia.vercel.app" />
             {/* <meta name="twitter:card" content="summary_large_image"/> */}
             <meta name="twitter:site" content="@spoofy507"/>
           </Head>
