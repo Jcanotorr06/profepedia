@@ -1,9 +1,10 @@
 import {FC} from 'react'
+import { MainSearchBox } from '../Sections'
 
 const SearchPage:FC = () => {
   return (
     <main>
-        <h1>HOME SEARCH PAGE</h1>
+        <MainSearchBox/>
     </main>
   )
 }
