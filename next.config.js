@@ -22,4 +22,42 @@ module.exports = withPWA({
   },
   reactStrictMode: true,
   swcMinify: true,
+  async headers() {
+    return [{
+      source: '/:path*',
+      headers: [
+        {
+          key: 'X-XSS-Protection',
+          value: '1; mode=block'
+        },
+        {
+          key: 'X-Frame-Options',
+          value: 'SAMEORIGIN'
+        },
+        {
+          key: 'Permissions-Policy',
+          value: 'camera=(), microphone=(), geolocation=()'
+        },
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff'
+        },
+        {
+          key: 'Referrer-Policy',
+          value: 'origin-when-cross-origin'
+        },
+        {
+          key: 'Content-Security-Policy',
+          value: `
+            default-src 'self';
+            script-src 'self' https://www.googletagmanager.com 'unsafe-eval' 'unsafe-inline';
+            script-src-elem 'self' https://www.googletagmanager.com 'unsafe-inline';
+            img-src 'self' data:;
+            style-src 'self' fonts.googleapis.com 'unsafe-inline';
+            font-src 'self' fonts.googleapis.com fonts.gstatic.com;  
+          `.replace(/\s{2,}/g, ' ').trim()
+        }
+      ]
+    }]
+  }
 });
