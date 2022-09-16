@@ -11,9 +11,10 @@ const OfflinePage:NextPage = () => {
           <title>Offline | Profepedia</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main className="w-screen h-screen overflow-hidden flex justify-center items-center">
-          <div className="p-2 text-center">
-            <h1>You&apos;re Offline</h1>
+        <main className="w-full h-screen overflow-hidden flex justify-center items-center">
+          <div className="text-center text-lg">
+            <i className="bi bi-wifi-off"/>&nbsp;
+            Offline
           </div>
         </main>
       </>
