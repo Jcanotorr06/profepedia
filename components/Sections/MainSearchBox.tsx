@@ -12,40 +12,45 @@ const MainSearchBox = () => {
     const router = useRouter()
 
     const [query, setQuery] = useState<string>('')
-  const [isValid, setIsValid] = useState<boolean>(false)
-  const [loadingSuggestions, setLoadingSuggestions] = useState<boolean>(false)
-  const intl = useIntl()
+    const [isValid, setIsValid] = useState<boolean>(false)
+    const [loadingSuggestions, setLoadingSuggestions] = useState<boolean>(false)
+    const intl = useIntl()
 
-  const handleSearchChange = async (e:ChangeEvent<HTMLInputElement>) => {
-    let { value, validity:{ valid } } = e.currentTarget
-    let payload = value.trim()
-    setQuery(payload)
-    setIsValid(valid)
-    console.log('VALID: ',valid)
-    console.log('LENGTH: ', payload.length)
-    if(valid && payload.length >= 4 && payload.length <= 20){
-      console.log('QUERY: ', payload)
+    const handleSearchChange = async (e:ChangeEvent<HTMLInputElement>) => {
+      let { value, validity:{ valid } } = e.currentTarget
+      let payload = value.trim()
+      setQuery(payload)
+      setIsValid(valid)
+    }
+
+    const handleSubmit = () => {
+      if(query.length > 0 && isValid){
+        handleSearch(query)
+      }
+    }
+
+    useEffect(() => {
       setLoadingSuggestions(true)
-      await getSearchSuggestions(payload).then(res => {
-        if(!res){
-          toast.error("There was an error")
-        }
-        setLoadingSuggestions(false)
-      })
-    }
-  }
+      const delayDebounce = setTimeout(async () => {
+        if(isValid && query.length >= 4 && query.length <= 20){
+        console.log('QUERY: ', query)
+        await getSearchSuggestions(query).then(res => {
+          if(!res){
+            toast.error("There was an error")
+          }
+          setLoadingSuggestions(false)
+        })
+      }
+      }, 3000)
+      
+      return () => clearTimeout(delayDebounce)
+    }, [query, isValid])
 
-  const handleSubmit = () => {
-    if(query.length > 0 && isValid){
-      handleSearch(query)
-    }
-  }
-
-  useEffect(() => {
-    if(searchSuggestions.length > 0){
-      console.log(searchSuggestions)
-    }
-  }, [searchSuggestions])
+    useEffect(() => {
+      if(searchSuggestions.length > 0){
+        console.log(searchSuggestions)
+      }
+    }, [searchSuggestions])
 
     return (
     <section className="w-full bg-faded rounded-2xl border-2 border-black border-dashed search-shadow px-10 py-14 md:px-24 md:py-20 lg:py-40 lg:px-44 xl:px-64 xl:py-44 flex flex-col justify-center items-center">
