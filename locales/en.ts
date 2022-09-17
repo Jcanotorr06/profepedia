@@ -118,7 +118,21 @@ const messages = {
     "no_results": "No results found",
     "main_search_ph": "Enter your professor's name",
     "how_it_works": "HOW DOES IT WORK",
-    "how_it_works_description": "Profepedia is the first platform were you can publicly rate teachers in Panama."
+    "how_it_works_description": "Profepedia is the first platform dedicated to grading teachers in Panama.",
+
+    "landing_card_title_1": "Access only with your institutional email",
+    "landing_card_paragraph_1": "{bold} is a platform open to the public, but only students are allowed to share their experiences about teachers. Access with your institutional email to start sharing.",
+    "landing_card_title_2": "Find your professor",
+    "landing_card_paragraph_2": "Search our database of more than 1,700 teachers, which we update every semester in order to better serve new students.",
+    "landing_card_title_3": "Share your opinion anonymously",
+    "landing_card_paragraph_3": "We know that speaking publicly about your professors can be scary, that's why at {bold}, we decided to keep student identities 100% anonymous. In this way, we make sure that everyone can give their opinion without mincing words.",
+
+    "navigate": "Navigate",
+    "legal": "Legal",
+    "terms_of_use": "Terms of Use",
+    "privacy_policy": "Privacy Policy",
+    "community_guidelines": "Community Guidelines",
+    "social": "Our Socials"
 }
 
 export default messages

@@ -114,13 +114,27 @@ const messages = {
     "review_success_title": "¡Gracias por compartir tu opinión!",
     "review_success_message": "Muchas gracias por contribuir a la comunidad.",
 
-    "landing_title": "Encuentra tu Profesor Y Comparte tú Opinion",
-    "landing_description": "Cuentanos acerca de tus experiencias con los profesores y ayuda a otros estudiantes a tomar la mejor desicion.",
+    "landing_title": "Encuentra tu Profesor Y Comparte tú Opinión",
+    "landing_description": "Cuentanos acerca de tus experiencias con los profesores y ayuda a otros estudiantes a tomar la mejor desición.",
     "loading": "Cargando",
     "no_results": "No se han encontrado resultados",
     "main_search_ph": "Ingresa el nombre de tu profesor",
     "how_it_works": "COMO FUNCIONA",
-    "how_it_works_description": "Profepedia es la primera plataforma para calificar publicamente a los profesores en Panamá."
+    "how_it_works_description": "Profepedia es la primera plataforma dedicada a calificar a los profesores en Panamá.",
+
+    "landing_card_title_1": "Accede solo con tu correo institucional",
+    "landing_card_paragraph_1": "{bold} es una plataforma abierta a todo el pùblico, pero solo los estudiantes tienen permitido compartir sus experiencias acerca de los profesores. Accede con tu correo institucional para empezar a compartir.",
+    "landing_card_title_2": "Encuentra a tu profesor",
+    "landing_card_paragraph_2": "Busca en nuestra base de datos entre màs de 1,700 profesores, la cual actualizamos cada semestre para poder brindar un mejor servicio a nuevos estudiantes.",
+    "landing_card_title_3": "Comparte tu opinión anónimamente",
+    "landing_card_paragraph_3": "Sabemos que hablar publicamente acerca de tus profesores puede ser aterrador, por eso en {bold}, decidimos mantener las identidades de los estudiantes 100% anonimas. De esta manera, nos aseguramos de que todos puedan opinar sin pelos en la lengua.",
+
+    "navigate": "Navegación",
+    "legal": "Legal",
+    "terms_of_use": "Terminos de Uso",
+    "privacy_policy": "Política de Privacidad",
+    "community_guidelines": "Reglas de la Comunidad",
+    "social": "Redes Sociales"
 }
 
 export default messages
