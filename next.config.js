@@ -54,7 +54,8 @@ module.exports = withPWA({
             script-src-elem 'self' https://www.googletagmanager.com 'unsafe-inline';
             img-src 'self' data:;
             style-src 'self' fonts.googleapis.com 'unsafe-inline';
-            font-src 'self' fonts.googleapis.com fonts.gstatic.com;  
+            font-src 'self' fonts.googleapis.com fonts.gstatic.com;
+            connect-src 'self' https://csedztxtiukroxbgzshj.supabase.co
           `.replace(/\s{2,}/g, ' ').trim()
         }
       ]
