@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Logo from '../../public/logo.svg'
 import Kofi from '../../public/landing/kofi.svg'
 import moment from 'moment'
+import { Translate } from '../Translation'
 
 const Footer = () => {
   return (
@@ -11,34 +12,48 @@ const Footer = () => {
       <footer className="footer p-10 bg-neutral text-neutral-content">
         {/*  */}
         <section>
-          <span className="footer-title text-neutral-content">Navigate</span>
+          <Translate className="footer-title text-neutral-content" label="navigate"/>
           <Link href="/" scroll={false}>
-            <a className="link link-hover text-neutral-content">Inicio</a>
+            <a>
+              <Translate className="link link-hover text-neutral-content" label="home"/>
+            </a>
           </Link>
           <Link href="/about" scroll={false}>
-            <a className="link link-hover text-neutral-content">About us</a> 
+            <a>
+              <Translate className="link link-hover text-neutral-content" label="about"/>
+            </a>
           </Link>
           <Link href="/contacto" scroll={false}>
-            <a className="link link-hover text-neutral-content">Contact</a> 
+            <a>
+              <Translate className="link link-hover text-neutral-content" label="contact"/>
+            </a>
           </Link>
           <Link href="/faq" scroll={false}>
-            <a className="link link-hover text-neutral-content">Faq</a> 
+            <a>
+              <Translate className="link link-hover text-neutral-content" label="faq"/>
+            </a> 
           </Link>
         </section>
         <section>
-          <span className="footer-title text-neutral-content">Legal</span>
+          <Translate className="footer-title text-neutral-content" label="legal"/>
           <Link href="/terminos" scroll={false}>
-            <a className="link link-hover text-neutral-content">Terms of Use</a> 
+            <a>
+              <Translate className="link link-hover text-neutral-content" label="terms_of_use"/>
+            </a> 
           </Link>
           <Link href="/privacidad" scroll={false}>
-            <a className="link link-hover text-neutral-content">Privacy Policy</a> 
+            <a>
+              <Translate className="link link-hover text-neutral-content" label="privacy_policy"/>
+            </a> 
           </Link>
           <Link href="/reglas" scroll={false}>
-            <a className="link link-hover text-neutral-content">Community Guidelines</a>
+            <a>
+              <Translate className="link link-hover text-neutral-content" label="community_guidelines"/>
+            </a> 
           </Link>
         </section>
         <section>
-          <span className="footer-title text-neutral-content">Social</span>
+          <Translate className="footer-title text-neutral-content" label="social"/>
           <div className="grid grid-flow-col gap-4">
             <a href="https://www.instagram.com/myprofepedia/" target="_blank" rel="noopener noreferrer" title="Instagram"><i className="bi bi-instagram text-neutral-content"/></a>
             <a href="https://medium.com/@myprofepedia" target="_blank" rel="noopener noreferrer" title="Medium"><i className="bi bi-medium text-neutral-content"/></a>

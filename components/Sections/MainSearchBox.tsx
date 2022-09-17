@@ -56,11 +56,11 @@ const MainSearchBox = () => {
     <section className="w-full bg-faded rounded-2xl border-2 border-black border-dashed search-shadow px-10 py-14 md:px-24 md:py-20 lg:py-40 lg:px-44 xl:px-64 xl:py-44 flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center gap-11">
             <div className="text-center ">
-                <h1 className="font-black text-5xl">
+                <h1 className="font-black text-3xl md:text-4xl lg:text-5xl">
                     {/* Encuentra tu Profesor Y Comparte tú Opinion */}
                     <Translate label="landing_title"/>
                 </h1>
-                <p className="font-light muted font-monospace text-sm mt-3">
+                <p className="font-light muted font-monospace text-xs md:text-sm mt-3">
                     {/* Cuentanos acerca de tus experiencias con los profesores y ayuda a otros estudiantes a tomar la mejor desicion. */}
                     <Translate label="landing_description"/>
                 </p>
@@ -77,7 +77,7 @@ const MainSearchBox = () => {
                     onChange={handleSearchChange} 
                     name="search_main" 
                     autoComplete='search_professor' 
-                    className="rounded-full py-4 px-12 flex-grow w-full md:w-auto shadow-md" 
+                    className="rounded-full py-3 px-6 md:py-4 md:px-12 flex-grow w-full md:w-auto shadow-md" 
                     placeholder={intl.formatMessage({id: 'main_search_ph', defaultMessage: 'Ingresa el nombre de tu profesor'})} />
                 <button className="btn btn-circle btn-error shadow" onClick={() => handleSubmit()} disabled={query.length === 0}><i className="bi bi-search text-white "/></button>
                 {query.length >= 4 &&
