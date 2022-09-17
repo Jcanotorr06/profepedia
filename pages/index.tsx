@@ -1,21 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Translate } from '../components/Translation'
-import { useUser, useLocale, useMode, useSearch } from '../context'
-import Link from 'next/link';
 
 //Import Images
-import Business from '../public/landing/business.svg'
-import { toast } from 'react-toastify'
-import Load from 'react-loading';
-import { IconButton } from '../components/Buttons'
-import { GradeBar, GradeGraph } from '../components/GradeGraph'
-import { Grade } from '../types/grade'
-import { ChangeEvent, useEffect, useState } from 'react'
-import { ErrorHandler } from '../components/ErrorHandler'
-import { formatNombre } from '../utils/utils'
-import { useRouter } from 'next/router'
 import { MainSearchBox } from '../components/Sections'
 
 const Home: NextPage = () => {
