@@ -9,6 +9,8 @@ const messages = {
     "contact": "Contacto",
     "faq": "FAQ",
     "faq_title": "Preguntas Frecuentes",
+    "faq_title_2": "Preguntas de Profesores",
+    "faq_title_3": "¿Aún tienes dudas?",
     "search_placeholder": 'Buscar Profesor',
     "login_title": "Bienvenido a Profepedia",
     "login_message": "Ingresa tu correo universitario y te enviaremos un link de un solo uso para iniciar sesión.",
@@ -134,7 +136,53 @@ const messages = {
     "terms_of_use": "Terminos de Uso",
     "privacy_policy": "Política de Privacidad",
     "community_guidelines": "Reglas de la Comunidad",
-    "social": "Redes Sociales"
+    "social": "Redes Sociales",
+    
+    "student_question_1": "¿Cual es el propósito de esta página?",
+    "student_answer_1": `{bold} se trata de ayudar a los estudiantes a responder una sola pregunta: ¿qué necesito saber para maximizar mis posibilidades de éxito en una clase determinada? Todo lo que hacemos en {bold} lo vemos a través del lente de esa pregunta.{br}
+    {bold} permite a los usuarios compartir experiencias sobre cómo los docentes y profesores imparten sus clases. Los estudiantes no son iguales, y lo que puede resultar desafiante para un estudiante puede ser fácil para otro.
+    No siempre podemos elegir a nuestros maestros, pero si podemos ingresar a una nueva clase sabiendo un poco sobre su enfoque, estamos en una mejor posición para tener éxito. Los maestros se benefician de que los estudiantes lleguen con un conjunto de expectativas más claras.
+    `,
+    "student_question_2": "¿Quién puede calificar a los profesores?",
+    "student_answer_2": `Las reseñas solo pueden ser realizadas por usuarios con direcciones de correo electrónico universitarias. Creemos que las únicas dos partes con un conocimiento profundo de cómo funciona la clase son el estudiante y el profesor.{br}
+    Pase lo que pase, siempre tome las calificaciones con pinzas. Si bien hacemos todo lo posible para asegurarnos de que solo los estudiantes completen las encuestas, existe un límite en la efectividad de cualquier proceso de verificación
+    `,
+    "student_question_3": "¿Mi profesor sabrá que los he calificado?",
+    "student_answer_3": `¡No! No mostramos su información personal en ninguna parte del sitio. Aunque debe iniciar sesión con su correo electrónico, todas las calificaciones enviadas permanecerán anónimas.{br}
+    Si bien todos los comentarios se publican de forma anónima, no podemos garantizar que un profesor no pueda identificarlo por los detalles que incluye. Recomendamos encarecidamente a todos que escriban comentarios constructivos sin incluir ninguna información de identificación sobre usted u otros. Si nuestros moderadores en línea determinan que el comentario podría identificarlo a usted o a cualquier otra persona, se eliminará la publicación.`,
+    "student_question_4": "¿Qué tan pronto se publican mis calificaciones?",
+    "student_answer_4": "Las calificaciones se publican instantaneamente al momento de su envío, pero si nuestros moderadores encuentran un problema con algún comentario, puede que sea removida de la página",
+    "student_question_5": "¿Por qué se eliminó mi calificación?",
+    "student_answer_5": `A veces, las calificaciones se eliminan debido a comentarios inapropiados, pero más comúnmente se eliminan después de haber sido identificadas como originarias de la misma fuente (spam de calificaciones, también llamado "astroturfing"). ¡Recuerde, califique a cada maestro o profesor solo una vez!`,
+    "student_question_6": "¿Cómo denuncio un comentario o una reseña que creo que debería eliminarse de su sitio?",
+    "student_answer_6": `Si cree que un comentario o reseña es inapropiado y viola las pautas de nuestro sitio, puede marcar la calificación a través la bandera en la parte inferior del comentario. Se enviará a nuestros moderadores para una revisión inmediata y, si determinan que va en contra de nuestras pautas, se eliminará.{br}
+    Tenga en cuenta que solo se eliminan los comentarios que violan nuestras pautas. Lamentablemente, no eliminamos las calificaciones solo porque alguien no esté de acuerdo con ellas.`,
+    "student_question_7": "Uno de mis comentarios fue eliminado. ¿Que comentarios son bienvenidos en la plataforma?",
+    "student_answer_7": `Los comentarios deben ser objetivos y específicos. Recuerde, su audiencia es alguien que una vez entra a la clase por primera vez. ¿Qué desearías que alguien te hubiera dicho de antemano que te hubiera dado una ventaja?{br}
+    Si has tenido una mala experiencia con una clase, los insultos son el camino equivocado. No ayudan a la siguiente persona y probablemente serán eliminados. Si canalizas ese sentimiento para asegurarte de que la siguiente persona tenga una mejor oportunidad, y si hacen lo mismo en una clase que los frustró, con el tiempo la información para todos será mucho más útil.
+    `,
+    "teacher_question_1": "¡Estás infringiendo los derechos de autor de mi nombre!",
+    "teacher_answer_1": "Los derechos de autor no protegen nombres, títulos, eslóganes o frases cortas.",
+    "teacher_question_2": "¿Por qué se eliminaron algunas de mis calificaciones?",
+    "teacher_answer_2": "Eliminamos las calificaciones por varias razones, pero generalmente se debe a que uno de nuestros filtros de spam automatizados piensa que hay varias calificaciones provenientes de la misma fuente. Cuando detectamos esto, nuestro sistema generalmente eliminará automáticamente las calificaciones duplicadas. Además, si nuestro sistema detecta múltiples calificaciones provenientes de la misma fuente, es posible que requiera que los nuevos calificadores inicien sesión antes de calificar durante un período de tiempo.",
+    "teacher_question_3": "¿Cómo puedo eliminar una calificación de su sitio?",
+    "teacher_answer_3": "Por lo general, no eliminamos las calificaciones. Este sitio es para que las personas informen sobre sus experiencias. Dicho esto, generalmente verá una bandera asociada con cada calificación. Cuando hace clic en esa bandera, se nos envía la calificación para que la revisemos nuevamente. Si contiene malas palabras o cualquier otra cosa que viole las pautas y los términos y condiciones de nuestro sitio, lo manejaremos. Si no se determina que la calificación infringe, generalmente la aprobamos nuevamente y la bandera desaparece",
+    "teacher_question_4": "¿Por qué permiten que la gente publique de forma anónima?",
+    "teacher_answer_4": `De acuerdo con el articulo 37 de la constitución de Panamá: Toda persona puede emitir libremente su pensamiento de palabra, por escrito o por cualquier otro medio, sin sujeción o censura previa; pero existen las responsabilidades legales cuando por alguno de estos medios se atenta contra la reputación o la honra de las personas o contra la seguridad social o el orden público.{br}
+    Consideramos que los estudiantes tienen el derecho a expresar sus opiniones y compartir sus experiencias con los profesores sin miedo a desquite de profesores. Si usted considera que alguna calificación u opinión es falsa, siéntase libre de reportarla y la misma será revisada detenidamente lo más pronto posible.
+    `,
+    "teacher_question_5": "Planeo hacerme pasar por estudiante y calificarme a mí mismo para aumentar mi calificación general.",
+    "teacher_answer_5": "Nosotros utilizamos moderadores humanos y algoritmos automatizados para remover calificaciones fraudulentas.",
+    "teacher_question_6": "Pero una de estas calificaciones es falsa y está perjudicando mi imagen. Quiero enviarle una carta exigiendo que se elimine.",
+    "teacher_answer_6": "No aceptamos cartas de demanda porque no es nuestra función determinar si una reseña es verdadera o falsa. Puede cuestionar la veracidad de una reseña, pero su disputa no necesariamente la hace falsa. Aun así, creemos que su voz debe ser escuchada, por lo que siempre puede publicar una respuesta pública a cualquier reseña en este sitio. Además, si hay una bandera junto a la calificación, puede hacer clic en ella para que se revise la calificación. Si no hay una bandera roja, significa que la calificación ya se revisó y volvió a aprobar, y no se volverá a revisar.",
+    "teacher_question_7": "¿Cómo aparece mi nombre en el sitio sin mi permiso?",
+    "teacher_answer_7": "La información de todos los profesores listados en nuestra página es obtenida directamente de los sitios web de las universidades.",
+    "teacher_question_8": "Soy un profesor y quiero eliminar mi perfil",
+    "teacher_answer_8": `No eliminamos a los profesores de nuestro sitio a menos que ya no estén enseñando en la universidad mencionada y hayan sido eliminados del sitio web de la universidad.{br}
+    Si alguna vez le preocupa que un comentario específico viole las pautas de nuestro sitio, reporte la calificación a través la bandera en la parte inferior del comentario. El comentario se derivará a nuestros moderadores y lo revisarán de inmediato y lo eliminarán si va en contra de nuestras pautas.`,
+
+    "faq_paragraph_3": "Por favor dirigase a la {contact} y envienos un mensaje. Tome en cuenta que, aún si leemos cada pregunta y comentario enviado, no podemos garantizar que recibirá una respuesta.",
+    "contact_page": "página de contacto"
 }
 
 export default messages

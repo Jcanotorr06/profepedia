@@ -9,6 +9,8 @@ const messages = {
     "contact": "Contact",
     "faq": "FAQ",
     "faq_title": "Frequently Asked Questions",
+    "faq_title_2": "Teacher's Questions",
+    "faq_title_3": "Still Have Questions?",
     "search_placeholder": 'Search Professor',
     "login_title": "Welcome to Profepedia",
     "login_message": "Enter your student email and we will send you a one time login link.",
@@ -132,7 +134,53 @@ const messages = {
     "terms_of_use": "Terms of Use",
     "privacy_policy": "Privacy Policy",
     "community_guidelines": "Community Guidelines",
-    "social": "Our Socials"
+    "social": "Our Socials",
+    
+    "student_question_1": "What is the purpose of this page?",
+    "student_answer_1": `{bold} is about helping students answer a single question: what do I need to know to maximize my chances of success in a given class? Everything we do at {bold} we see through the lens of that question.{br}
+    {bold} allows users to share experiences on how teachers and professors deliver their classes. Students are not the same, and what may be challenging for one student may be easy for another.
+    We can't always pick our teachers, but if we can walk into a new class knowing a little about its focus, we're in a better position to succeed. Teachers benefit from students arriving with a clearer set of expectations.
+    `,
+    "student_question_2": "Who can rate teachers?",
+    "student_answer_2": `Reviews can only be done by users with university email addresses. We believe that the only two parties with a deep understanding of how the class works are the student and the teacher.{br}
+    No matter what happens, always take grades with a grain of salt. While we do our best to ensure only students complete surveys, there is a limit to the effectiveness of any verification process.
+    `,
+    "student_question_3": "Will my teacher know that I have reviewed them?",
+    "student_answer_3": `No! We do not display your personal information anywhere on the site. Although you must log in with your email, all grades submitted will remain anonymous.{br}
+    While all comments are posted anonymously, we cannot guarantee that a teacher will not be able to identify you from the details you include. We strongly encourage everyone to write constructive comments without including any identifying information about yourself or others. If our online moderators determine that the comment could identify you or anyone else, the post will be removed.`,
+    "student_question_4": "How soon are my ratings posted?",
+    "student_answer_4": "Ratings are posted instantly upon submission, but if our moderators find a problem with a comment, it may be removed from the page.",
+    "student_question_5": "Why was my rating removed?",
+    "student_answer_5": `Ratings are sometimes removed due to inappropriate comments, but more commonly they are removed after being identified as originating from the same source (rating spam, also called "astroturfing"). Remember, rate each teacher or professor only once!`,
+    "student_question_6": "How do I report a comment or review that I think should be removed from your site?",
+    "student_answer_6": `If you feel a comment or review is inappropriate and violates our site guidelines, you can flag the rating by using the flag at the bottom of the comment. It will be sent to our moderators for immediate review, and if they determine it goes against our guidelines, it will be removed.{br}
+    Please note that only comments that violate our guidelines are removed. Unfortunately, we don't remove ratings just because someone doesn't agree with them.`,
+    "student_question_7": "One of my comments was deleted. What comments are welcome on the platform?",
+    "student_answer_7": `Comments should be objective and specific. Remember, your audience is someone who walks into the class for the first time. What do you wish someone had told you beforehand that would have given you an advantage?{br}
+    If you've had a bad experience with a class, name-calling is the wrong way to go. They don't help the next person and will likely be eliminated. If you channel that feeling into making sure the next person has a better chance, and if they do the same thing in a class that frustrated them, the information for everyone will be much more useful over time.
+    `,
+    "teacher_question_1": "You are infringing the copyright of my name!",
+    "teacher_answer_1": "Copyright does not protect names, titles, slogans or short phrases.",
+    "teacher_question_2": "Why were some of my ratings removed?",
+    "teacher_answer_2": "We remove ratings for various reasons, but it's usually because one of our automated spam filters thinks there are multiple ratings coming from the same source. When we detect this, our system will usually automatically remove duplicate ratings. Also, if our system detects multiple ratings coming from the same source, it may require new raters to log in before grading for a period of time.",
+    "teacher_question_3":"How can I remove a rating from your site?",
+    "teacher_answer_3": "We don't generally remove ratings. This site is for people to report their experiences. That said, you'll generally see a flag associated with each rating. When you click on that flag, the rating is sent to us for review again. If it contains profanity or anything else that violates our site's guidelines and terms and conditions, we'll handle it. If the rating isn't found to be in violation, we usually approve it again and the flag goes away.",
+    "teacher_question_4": "Why do you allow people to post anonymously?",
+    "teacher_answer_4": `According to article 37 of the Panamanian constitution: Every person can freely express their thoughts orally, in writing or by any other means, without prior restraint or censorship; but there are legal responsibilities when by any of these means the reputation or honor of people or against social security or public order is violated.{br}
+    We believe that students have the right to express their opinions and share their experiences with teachers without fear of retaliation from teachers. If you believe that any rating or opinion is false, please feel free to report it and it will be carefully reviewed as soon as possible.
+    `,
+    "teacher_question_5": "I plan to pose as a student and rate myself to increase my overall grade.",
+    "teacher_answer_5": "We use human moderators and automated algorithms to remove fraudulent ratings.",
+    "teacher_question_6": "But one of these ratings is fake and it's hurting my image. I want to send you a letter demanding that it be removed.",
+    "teacher_answer_6": "We do not accept demand letters because it is not our role to determine whether a review is true or false. You can dispute the accuracy of a review, but your dispute does not necessarily make it false. Still, we believe your voice should be heard, so You can always post a public response to any review on this site. Also, if there is a flag next to the rating, you can click on it to have the rating reviewed. If there is no red flag, the rating has already been posted. reviewed and reapproved, and will not be reviewed again.",
+    "teacher_question_7": "How does my name appear on the site without my permission?",
+    "teacher_answer_7": "The information of all the professors listed on our page is obtained directly from the university websites.",
+    "teacher_question_8": "I'm a professor and I want to delete my profile",
+    "teacher_answer_8": `We do not remove professors from our site unless they are no longer teaching at the named university and have been removed from the university's website.{br}
+    If you are ever concerned that a specific comment violates our site's guidelines, please report the rating via the flag at the bottom of the comment. The comment will be forwarded to our moderators and they will immediately review it and remove it if it goes against our guidelines.`,
+
+    "faq_paragraph_3": "Please go to our {contact} and send us a message. Please note that even if we read every question and comment submitted, we cannot guarantee that you will receive a response.",
+    "contact_page": "contact page"
 }
 
 export default messages
