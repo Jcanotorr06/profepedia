@@ -6,16 +6,14 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Script from 'next/script'
 import NextNProgress from 'nextjs-progressbar'
+import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
-import { UserProvider } from '../context/UserContext'
-import { ModeProvider, useMode } from '../context/ModeContext'
-import { LocaleProvider } from '../context/LocaleContext'
 import DefaultLayout from '../layouts/default'
 import { Toast, TopMessage } from '../components/Notifications'
 import { disableReactDevTools } from '../utils/disableReactDevTools'
-import { ModalProvider, ProfessorProvider, SearchProvider } from '../context'
-import { Modal } from './../components/Modals';
-
+import { ModalProvider, ProfessorProvider, SearchProvider, ModeProvider, LocaleProvider, UserProvider } from '../context'
+/* import { Modal } from './../components/Modals'; */
+const Modal = dynamic(() => import('./../components/Modals/Modal'), {ssr: false})
 function MyApp({ Component, pageProps }: AppProps) {
   
   useEffect(() => {
@@ -23,8 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       disableReactDevTools()
     }
   }, [])
-
-  const { mode } = useMode()
 
   return (
     <>

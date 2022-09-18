@@ -2,20 +2,26 @@ import React, { ReactNode } from 'react'
 import { useModal, useMode } from '../../context'
 import { MouseEventHandler } from 'react';
 import { IconButton } from '../Buttons';
-import { AnimatePresence, AnimationProps, motion } from 'framer-motion';
-import { LoginModal, LoginConfirmationModal, ReviewModal, ReviewConfirmationModal, ReviewSuccessModal } from './'
+import { AnimatePresence, motion } from 'framer-motion';
+/* import { LoginModal, LoginConfirmationModal, ReviewModal, ReviewConfirmationModal, ReviewSuccessModal } from './' */
+import dynamic from 'next/dynamic';
 import { ErrorHandler } from '../ErrorHandler';
+const LoginModal = dynamic(() => import('./LoginModal'), {ssr: false})
+const LoginConfirmationModal = dynamic(() => import('./LoginConfirmationModal'), {ssr: false})
+const ReviewModal = dynamic(() => import('./ReviewModal'), {ssr: false})
+const ReviewConfirmationModal = dynamic(() => import('./ReviewConfirmationModal'), {ssr: false})
+const ReviewSuccessModal = dynamic(() => import('./ReviewSuccessModal'), {ssr: false})
 
 interface Props extends  React.HTMLAttributes<HTMLDialogElement>{
-    children?: ReactNode,
-    isOpen?: boolean
+  children?: ReactNode,
+  isOpen?: boolean
 }
 
 
 const Modal = ({ children, ...rest }:Props) => {
   const { show, closeModal, modalContent, modalType, modalProps } = useModal()
   const { mode } = useMode()
-
+  
   const handleOverlayClick:MouseEventHandler = (e) => {
     let id = (e.target as Element).id
     if(id === 'modal_overlay'){

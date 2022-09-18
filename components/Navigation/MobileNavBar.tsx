@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { HTMLMotionProps, motion, SVGMotionProps } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { IconButton, ModeSwitchButton, TextButton } from "../Buttons"
 import { useState } from 'react';
 import { LanguageDropdown, Translate } from "../Translation";

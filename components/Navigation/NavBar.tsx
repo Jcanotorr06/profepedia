@@ -1,16 +1,14 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from 'next/router';
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useModal, useMode, useUser, useSearch } from "../../context"
 import { TextButton, IconButton, ModeSwitchButton } from "../Buttons"
 import { LanguageDropdown, Translate } from "../Translation"
 import { useIntl } from "react-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FormEvent, useState } from 'react';
 import Logo from '../../public/logo.svg'
-import { LoginModal } from "../Modals";
-import { toast } from "react-toastify";
+/* import { toast } from "react-toastify"; */
 
 interface SearchInput {
   prof: string
@@ -20,8 +18,8 @@ const NavBar = () => {
 
   const intl = useIntl()
   const route = useRouter()
-  const { register, handleSubmit:formHandleSubmit, formState } = useForm<SearchInput>()
-  const { mode, swapMode } = useMode()
+  const { register, handleSubmit:formHandleSubmit } = useForm<SearchInput>()
+  const { mode } = useMode()
   const { user, logout } = useUser()
   const { openModal } = useModal()
   const { handleSearch, previousQuery, query:_query } = useSearch()
@@ -32,18 +30,14 @@ const NavBar = () => {
 
   const handleLogout = async () => {
     await logout()
-      .then(res => {
+      .then(async res => {
+        const { toast } = (await import('react-toastify')).default
         if(res){
           toast.success(intl.formatMessage({id: "logout_success", defaultMessage: "Sesión cerrada exitosamente."}))
         }else{
           toast.error(intl.formatMessage({id: "logout_error", defaultMessage: "Ha ocurrido un error al cerrar sesión."}))
         }
       })
-  }
-
-  const classNames = {
-    'light': 'text-yellow-400 hover:text-yellow-500 hover:border-yellow-200 focus:text-yellow-600 focus:border-yellow-300',
-    'dark': 'text-indigo-500 hover:text-indigo-300 hover:border-indigo-400 focus:text-indigo-300 focus:border-indigo-500'
   }
 
   return (
