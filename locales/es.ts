@@ -183,7 +183,8 @@ const messages = {
 
     "faq_paragraph_3": "Por favor dirigase a la {contact} y envienos un mensaje. Tome en cuenta que, aún si leemos cada pregunta y comentario enviado, no podemos garantizar que recibirá una respuesta.",
     "contact_page": "página de contacto",
-    "no_reviews": "😪 No hay calificaciones existentes"
+    "no_reviews": "😪 No hay calificaciones existentes",
+    "professor_title": "Profesor(a) {name}"
 }
 
 export default messages
