@@ -182,7 +182,8 @@ const messages = {
     "faq_paragraph_3": "Please go to our {contact} and send us a message. Please note that even if we read every question and comment submitted, we cannot guarantee that you will receive a response.",
     "contact_page": "contact page",
     "no_reviews": "😪 No ratings found",
-    "professor_title": "Professor {name}"
+    "professor_title": "Professor {name}",
+    "already_reported": "This review has already been reported"
 }
 
 export default messages
