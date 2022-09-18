@@ -180,7 +180,8 @@ const messages = {
     If you are ever concerned that a specific comment violates our site's guidelines, please report the rating via the flag at the bottom of the comment. The comment will be forwarded to our moderators and they will immediately review it and remove it if it goes against our guidelines.`,
 
     "faq_paragraph_3": "Please go to our {contact} and send us a message. Please note that even if we read every question and comment submitted, we cannot guarantee that you will receive a response.",
-    "contact_page": "contact page"
+    "contact_page": "contact page",
+    "no_reviews": "😪 No ratings found"
 }
 
 export default messages
