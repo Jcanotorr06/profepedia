@@ -19,13 +19,9 @@ import { Modal } from './../components/Modals';
 function MyApp({ Component, pageProps }: AppProps) {
   
   useEffect(() => {
-    /* if(process.env.NODE_ENV === 'production') {
+    if(process.env.NODE_ENV === 'production') {
       disableReactDevTools()
-      console.log = () =>{}
-      console.error = () =>{}
-      console.warn = () =>{}
-      console.info = () =>{}
-    } */
+    }
   }, [])
 
   const { mode } = useMode()
