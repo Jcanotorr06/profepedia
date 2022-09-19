@@ -13,22 +13,22 @@ const Footer = () => {
         {/*  */}
         <section>
           <Translate className="footer-title text-neutral-content" label="navigate"/>
-          <Link href="/" scroll={false}>
+          <Link href="/" scroll={true}>
             <a>
               <Translate className="link link-hover text-neutral-content" label="home"/>
             </a>
           </Link>
-          <Link href="/about" scroll={false}>
+          <Link href="/about" scroll={true}>
             <a>
               <Translate className="link link-hover text-neutral-content" label="about"/>
             </a>
           </Link>
-          <Link href="/contacto" scroll={false}>
+          <Link href="mailto: myprofepedia@gmail.com" scroll={true}>
             <a>
               <Translate className="link link-hover text-neutral-content" label="contact"/>
             </a>
           </Link>
-          <Link href="/faq" scroll={false}>
+          <Link href="/faq" scroll={true}>
             <a>
               <Translate className="link link-hover text-neutral-content" label="faq"/>
             </a> 
@@ -39,17 +39,17 @@ const Footer = () => {
         </section>
         <section>
           <Translate className="footer-title text-neutral-content" label="legal"/>
-          <Link href="/terminos" scroll={false}>
+          <Link href="/terminos" scroll={true}>
             <a>
               <Translate className="link link-hover text-neutral-content" label="terms_of_use"/>
             </a> 
           </Link>
-          <Link href="/privacidad" scroll={false}>
+          <Link href="/privacidad" scroll={true}>
             <a>
               <Translate className="link link-hover text-neutral-content" label="privacy_policy"/>
             </a> 
           </Link>
-          <Link href="/reglas" scroll={false}>
+          <Link href="/reglas" scroll={true}>
             <a>
               <Translate className="link link-hover text-neutral-content" label="community_guidelines"/>
             </a> 

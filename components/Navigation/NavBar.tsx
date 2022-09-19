@@ -63,7 +63,7 @@ const NavBar = () => {
             <Translate label="faq" className={route.route === '/faq' ? 'font-bold' : ''}/>
           </a>
         </Link>
-        <Link href="/contacto">
+        <Link href="mailto: myprofepedia@gmail.com">
           <a>
             <Translate label="contact" className={route.route === '/contacto' ? 'font-bold' : ''}/>
           </a>

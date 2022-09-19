@@ -142,7 +142,7 @@ const FAQ:NextPage = () => {
           </h1>
           <div className="my-2 px-2 md:px-0">
             <p className="muted font-medium">
-              {intl.formatMessage({id: "faq_paragraph_3"}, {contact: <Link href="/contacto"><a className="text-success hover:text-success">{intl.formatMessage({id: "contact_page"})}</a></Link>})}
+              {intl.formatMessage({id: "faq_paragraph_3"}, {contact: <Link href="mailto: myprofepedia@gmail.com"><a className="text-success hover:text-success">{intl.formatMessage({id: "contact_page"})}</a></Link>})}
             </p>
           </div>
         </div>

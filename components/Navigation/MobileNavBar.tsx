@@ -190,7 +190,7 @@ const MobileNavBar = () => {
               >
                 <motion.div
                 variants={liVariants}>
-                  <Link href="/contacto">
+                  <Link href="mailto: myprofepedia@gmail.com">
                     <a onClick={() => handleLink()}>
                       <Translate label="contact" className="text-2xl font-medium"/>
                     </a>
