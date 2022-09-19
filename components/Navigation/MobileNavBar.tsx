@@ -266,30 +266,30 @@ const MobileNavBar = () => {
                   <div className="font-black">
                     <small>
                       <Link href="/terminos">
-                        <a onClick={() => handleLink()}>Terminos y Condiciones</a>
+                        <a onClick={() => handleLink()}><Translate label="terms_and_conditions"/></a>
                       </Link>
                     </small>
                     &nbsp;•&nbsp;
                     <small>
                       <Link href="/privacidad">
-                        <a onClick={() => handleLink()}>Privacidad</a>
+                        <a onClick={() => handleLink()}><Translate label="privacy_policy"/></a>
                       </Link>
                     </small>
                     &nbsp;•&nbsp;
                     <small>
                       <Link href="/reglas">
-                        <a onClick={() => handleLink()}>Reglas de Uso</a>
+                        <a onClick={() => handleLink()}><Translate label="community_guidelines"/></a>
                       </Link>
                     </small>
                     &nbsp;•&nbsp;
                     <small>
                       <Link href="/copyright">
-                        <a onClick={() => handleLink()}>Copyright</a>
+                        <a onClick={() => handleLink()}><Translate label="copyright"/></a>
                       </Link>
                     </small>
                     &nbsp;•&nbsp;
                     <small>
-                        <a onClick={() => handleLink()} href="https://ko-fi.com/profepedia" target="blank" rel="noref noopener">Donaciones</a>
+                        <a onClick={() => handleLink()} href="https://ko-fi.com/profepedia" target="blank" rel="noref noopener"><Translate label="donations"/></a>
                     </small>
                   </div>
                 </motion.div>
