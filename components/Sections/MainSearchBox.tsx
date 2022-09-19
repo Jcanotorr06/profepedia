@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import Loading from 'react-loading'
 import { toast } from 'react-toastify'
@@ -14,6 +14,7 @@ const MainSearchBox = () => {
     const [query, setQuery] = useState<string>('')
     const [isValid, setIsValid] = useState<boolean>(false)
     const [loadingSuggestions, setLoadingSuggestions] = useState<boolean>(false)
+    const getSearchSuggestionsRef = useRef(getSearchSuggestions)
     const intl = useIntl()
 
     const handleSearchChange = async (e:ChangeEvent<HTMLInputElement>) => {
@@ -30,11 +31,12 @@ const MainSearchBox = () => {
     }
 
     useEffect(() => {
+      let cancelled = false
       setLoadingSuggestions(true)
       const delayDebounce = setTimeout(async () => {
-        if(isValid && query.length >= 4 && query.length <= 20){
+        if(isValid && query.length >= 4 && query.length <= 20 && !cancelled){
         console.log('QUERY: ', query)
-        await getSearchSuggestions(query).then(res => {
+        await getSearchSuggestionsRef.current(query).then(res => {
           if(!res){
             toast.error("There was an error")
           }
@@ -43,7 +45,7 @@ const MainSearchBox = () => {
       }
       }, 3000)
       
-      return () => clearTimeout(delayDebounce)
+      return () => {clearTimeout(delayDebounce); cancelled=true}
     }, [query, isValid])
 
     useEffect(() => {
@@ -51,6 +53,10 @@ const MainSearchBox = () => {
         console.log(searchSuggestions)
       }
     }, [searchSuggestions])
+
+    useLayoutEffect(() => {
+      getSearchSuggestionsRef.current = getSearchSuggestions
+    }, [getSearchSuggestions])
 
     return (
     <section className="w-full bg-faded rounded-2xl border-2 border-black border-dashed search-shadow px-10 py-14 md:px-24 md:py-20 lg:py-40 lg:px-44 xl:px-64 xl:py-44 flex flex-col justify-center items-center">

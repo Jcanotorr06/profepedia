@@ -3,7 +3,7 @@ import Head from "next/head"
 import { Loading } from "../../../components/Navigation"
 import { useLocale, useModal, useMode, useProfessor, useUser } from "../../../context"
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState, FormEvent, MouseEvent } from 'react';
+import { useCallback, useEffect, useState, FormEvent, MouseEvent, useRef, useLayoutEffect } from 'react';
 import { formatGroup, formatNombre, isNumeric } from "../../../utils/utils";
 import { IconButton, TextButton } from "../../../components/Buttons";
 import { useIntl } from 'react-intl';
@@ -36,6 +36,8 @@ const Docente:NextPage = () => {
   const [orderBy, setOrderBy] = useState<string>('popular')
   const [reportTooltip, setReportTooltip] = useState<boolean>(true)
 
+  const getDataRef = useRef(getData)
+
   const titles:any = {
     5: 'awesome',
     4: 'good',
@@ -43,6 +45,10 @@ const Docente:NextPage = () => {
     2: 'bad',
     1: 'horrible'
   }
+
+  useLayoutEffect(() => {
+    getDataRef.current = getData
+  }, [getData])
 
   useEffect(() => {
     if(router.query.id && typeof router.query.id === 'string' && isNumeric(router.query.id)){
@@ -52,9 +58,13 @@ const Docente:NextPage = () => {
   }, [router.query.id])
 
   useEffect(() => {
-    if(id && (!data || (data && data.id !== id)) && !loading){
+    let cancelled:boolean = false
+    if(id && (!data || (data && data.id !== id)) && !loading && !cancelled){
       console.log(id)
-      getData(id)
+      getDataRef.current(id)
+    }
+    return () => {
+      cancelled = true
     }
   }, [id, data, loading])
 
@@ -66,14 +76,16 @@ const Docente:NextPage = () => {
       count: breakdown.count
     })))
   }, [ratingBreakdown, reviewCount])
+  
   useEffect(() => {
     console.log('GRADES: ',grades)
   }, [grades])
 
   useEffect(()=>{
-    setTimeout(() => {
+    const load = setTimeout(() => {
       setLoading(false)
     }, 1000);
+    return(() => clearTimeout(load))
   }, [])
 
   const handleOrderBy = (event: FormEvent<HTMLSelectElement>) => {

@@ -63,10 +63,6 @@ export function SearchProvider({children}:Props) {
     const [searchSuggestions, setSearchSuggestions] = useState<searchSuggestion[]>([])
     const router = useRouter()
 
-    useEffect(() => {
-
-    }, [query])
-
     const search = async (q:string, limit: number, rangeStart:number, rangeEnd:number) => {
         /* setLoading(true) */
         /* const { data, error } = await supabase.rpc("busqueda_docentes_full", {nom: q, lim: 10, offst: 0}) */

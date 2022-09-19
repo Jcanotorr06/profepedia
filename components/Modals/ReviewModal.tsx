@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { useModal, useProfessor, useUser } from '../../context'
@@ -50,13 +50,20 @@ const ReviewModal = () => {
     const [acceptTerms, setAcceptTerms] = useState<boolean>(false)
     const [reviewLength, setReviewLength] = useState<number>(0)
     const [loadingSendReview, setLoadingSendReview] = useState<boolean>(false)
+    const getReviewDataRef = useRef(getReviewData)
     const five = [1,2,3,4,5]
 
     useEffect(() => {
-        if(!tags[0] && !courses[0] && data && !loadingReviewData){
-            getReviewData(data.id)
+        let cancelled = false
+        if(!tags[0] && !courses[0] && data && !loadingReviewData && !cancelled){
+            getReviewDataRef.current(data.id)
         }
+        return () => {cancelled = true}
     }, [data, courses, tags, loadingReviewData])
+
+    useLayoutEffect(() => {
+        getReviewDataRef.current = getReviewData
+    }, [getReviewData])
 
     const handleRatingChange = (e:FormEvent<HTMLInputElement>) => {
         setRatingValue(parseInt(e.currentTarget.value))

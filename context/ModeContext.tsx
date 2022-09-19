@@ -26,12 +26,16 @@ export function ModeProvider({children}:Props) {
     const [mode, setMode] = useState<"light"|"dark">("light")
 
     useEffect(() => {
-        let storedMode = localStorage.getItem("mode")
-        if(storedMode && (storedMode === 'light' || storedMode === 'dark')){
-            setMode(storedMode)
-        }else{
-            localStorage.setItem("mode", "light")
+        let cancelled = false
+        if(!cancelled){
+            let storedMode = localStorage.getItem("mode")
+            if(storedMode && (storedMode === 'light' || storedMode === 'dark')){
+                setMode(storedMode)
+            }else{
+                localStorage.setItem("mode", "light")
+            }
         }
+        return () => {cancelled = true}
     }, [])
 
     const swapMode = () =>{

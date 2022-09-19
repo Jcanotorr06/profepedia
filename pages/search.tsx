@@ -19,9 +19,11 @@ const Search:NextPage = () => {
     const intl = useIntl()
 
     useEffect(() => {
-      if(!query && router.query.prof && typeof router.query.prof === "string" && /^[A-Za-z]+$/.test(router.query.prof)) {
+      let cancelled = false
+      if(!query && router.query.prof && typeof router.query.prof === "string" && /^[A-Za-z]+$/.test(router.query.prof) && !cancelled) {
         handleSearch(router.query.prof)
       }
+      return () => {cancelled = true}
     }, [router, query, handleSearch])
 
     // REDIRECT TO HOME SEARCH PAGE IF INVALID QUERY IS PASSED TO SEARCH

@@ -66,7 +66,11 @@ export function UserProvider({children}:Props) {
     }
 
     useEffect(() => {
-        checkUser()
+        let cancelled = false
+        if(!cancelled){
+            checkUser()
+        }
+        return () => {cancelled = true}
     }, [])
 
     useEffect(() => {
