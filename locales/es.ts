@@ -185,7 +185,9 @@ const messages = {
     "contact_page": "página de contacto",
     "no_reviews": "😪 No hay calificaciones existentes",
     "professor_title": "Profesor(a) {name}",
-    "already_reported": "Este review ya ha sido reportado"
+    "already_reported": "Este review ya ha sido reportado",
+    "donations": "Docaciones",
+    "copyright": "Copyright"
 }
 
 export default messages
