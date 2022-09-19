@@ -1,8 +1,9 @@
-import { AuthChangeEvent, Session } from "@supabase/supabase-js"
+import { AuthChangeEvent, Session, User } from "@supabase/supabase-js"
 import { useRouter } from "next/router"
-import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+import { createContext, ReactNode, useContext, useEffect, useRef, useState } from "react"
 import { supabase } from "../utils/supabaseClient"
 import { useModal } from "./ModalContext"
+import axios from 'axios';
 
 type userContext = {
     user: any,
@@ -44,17 +45,37 @@ type Props = {
 export function UserProvider({children}:Props) {
     const router = useRouter()
     const { openModal } = useModal()
-    const [user, setUser] = useState<any>(null)
+    const [user, setUser] = useState<User|null>(null)
     const [session, setSession] = useState<Session|null>(null)
     const [error, setError] = useState<any>(undefined)
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<string|undefined>(undefined)
 
+    const [ip, setIp] = useState<string|undefined>(undefined)
+    const [checking, setChecking] = useState<boolean>(false)
+    const [updating, setUpdating] = useState<boolean>(false)
+
     const checkUser = async () => {
         const supabaseUser = supabase.auth.user()
         console.log(supabaseUser)
         setUser(supabaseUser)
+        if(supabaseUser){
+            let {ip} = await axios.get("https://www.myexternalip.com/json").then(res => res.data)
+            console.log('IP ADDRESS: ',ip)
+            if(!updating){
+                setUpdating(true)
+                await supabase.auth.update({
+                    data: {
+                        ipAddress: ip
+                    }
+                })
+                setUpdating(false)
+                setChecking(false)
+            }
+        }
     } 
+
+    const checkUserRef = useRef(checkUser)
 
     const handleAuthChange = async (event:AuthChangeEvent, session:Session|null) => {
         await fetch('/api/auth', {
@@ -67,11 +88,12 @@ export function UserProvider({children}:Props) {
 
     useEffect(() => {
         let cancelled = false
-        if(!cancelled){
-            checkUser()
+        if(!cancelled && !checking){
+            setChecking(true)
+            checkUserRef.current()
         }
         return () => {cancelled = true}
-    }, [])
+    }, [checking])
 
     useEffect(() => {
         const { data } = supabase.auth.onAuthStateChange((event, session) => {
