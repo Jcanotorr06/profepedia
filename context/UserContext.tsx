@@ -51,7 +51,6 @@ export function UserProvider({children}:Props) {
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<string|undefined>(undefined)
 
-    const [ip, setIp] = useState<string|undefined>(undefined)
     const [checking, setChecking] = useState<boolean>(false)
     const [updating, setUpdating] = useState<boolean>(false)
 
@@ -108,12 +107,12 @@ export function UserProvider({children}:Props) {
             if(event === 'SIGNED_OUT') {
                 setSession(null)
             }
-            checkUser()
+            checkUserRef.current()
         })
         return () => {
             data?.unsubscribe()
         }
-    }, [router])
+    }, [router, checkUserRef])
 
     const login = (email:string) => {
         return new Promise<boolean>(async (resolve, reject) => {
