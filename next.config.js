@@ -55,7 +55,7 @@ module.exports = withPWA({
             img-src 'self' data:;
             style-src 'self' fonts.googleapis.com 'unsafe-inline';
             font-src 'self' fonts.googleapis.com fonts.gstatic.com;
-            connect-src 'self' https://csedztxtiukroxbgzshj.supabase.co https://api.openai.com
+            connect-src 'self' https://csedztxtiukroxbgzshj.supabase.co https://api.openai.com https://www.myexternalip.com/json
           `.replace(/\s{2,}/g, ' ').trim()
         }
       ]
