@@ -33,6 +33,9 @@ const Footer = () => {
               <Translate className="link link-hover text-neutral-content" label="faq"/>
             </a> 
           </Link>
+          <a  href="https://ko-fi.com/profepedia" target="blank" rel="noref noopener">
+            <Translate className="link link-hover text-neutral-content" label="donations"/>
+          </a>
         </section>
         <section>
           <Translate className="footer-title text-neutral-content" label="legal"/>
