@@ -184,7 +184,7 @@
       color: var(--surface-900);
   }
 
-  p, small, span, select, .text-icon {
+  p, small, span, select, .text-icon, input {
       color: var(--text-color);
   }
 
