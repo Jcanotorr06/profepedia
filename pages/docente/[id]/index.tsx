@@ -224,7 +224,7 @@ const Docente:NextPage = () => {
                         </div>
                       </div>
                       <div className="flex flex-col flex-grow gap-3">
-                        <div className="flex gap-1 md:gap-3 items-center text-sm flex-nowrap">
+                        <div className="flex gap-1 md:gap-3 items-center text-sm flex-wrap">
                           <div className="font-black md:text-base"><h2>{review.asignatura}</h2></div>
                           <div className={`px-3 py-1 font-bold text-xs rounded ${review.rating === 0 ? 'bg-gray-300' : review.rating < 3 ? 'bg-red-300' : review.rating < 4 ? 'bg-yellow-300' : 'bg-green-400'}`}>
                             <Translate label={`score_${titles[review.rating]}`}/>
@@ -246,7 +246,7 @@ const Docente:NextPage = () => {
                           <p>{review.review}</p>
                         </div>
                         {(review.tag1 || review.tag2 || review.tag3 )&& (
-                          <div className="flex gap-3 text-sm">
+                          <div className="flex gap-3 text-sm flex-wrap">
                             {review.tag1 && <Translate label={review.tag1} className="px-3 py-1 rounded-full ground font-bold shadow"/>}
                             {review.tag2 && <Translate label={review.tag2} className="px-3 py-1 rounded-full ground font-bold shadow"/>}
                             {review.tag3 && <Translate label={review.tag3} className="px-3 py-1 rounded-full ground font-bold shadow"/>}
