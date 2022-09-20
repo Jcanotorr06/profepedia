@@ -34,16 +34,17 @@ const MainSearchBox = () => {
       let cancelled = false
       setLoadingSuggestions(true)
       const delayDebounce = setTimeout(async () => {
+        console.log(isValid, query, cancelled)
         if(isValid && query.length >= 4 && query.length <= 20 && !cancelled){
         console.log('QUERY: ', query)
-        await getSearchSuggestionsRef.current(query).then(res => {
+        await getSearchSuggestions(query).then(res => {
           if(!res){
             toast.error("There was an error")
           }
           setLoadingSuggestions(false)
         })
       }
-      }, 3000)
+      }, 500)
       
       return () => {clearTimeout(delayDebounce); cancelled=true}
     }, [query, isValid])
@@ -54,9 +55,9 @@ const MainSearchBox = () => {
       }
     }, [searchSuggestions])
 
-    useLayoutEffect(() => {
+/*     useLayoutEffect(() => {
       getSearchSuggestionsRef.current = getSearchSuggestions
-    }, [getSearchSuggestions])
+    }, [getSearchSuggestions]) */
 
     return (
     <section className="w-full bg-faded rounded-2xl border-2 border-black border-dashed search-shadow px-10 py-14 md:px-24 md:py-20 lg:py-40 lg:px-44 xl:px-64 xl:py-44 flex flex-col justify-center items-center">
@@ -77,7 +78,7 @@ const MainSearchBox = () => {
                     type="text" 
                     minLength={4} 
                     maxLength={20}
-                    pattern="[a-zA-Z\s]"
+                    pattern="[a-zA-Z ]{4,20}"
                     required 
                     value={query} 
                     onChange={handleSearchChange} 
