@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <NextNProgress height={6} color="#6C4BDA"/>
               <ProfessorProvider>
                 <SearchProvider>
-                  <Toast/>
+                 {/*  <Toast/> */}
                   <Modal/>
                   <TopMessage/>
                   <DefaultLayout>
