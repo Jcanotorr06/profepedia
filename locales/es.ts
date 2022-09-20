@@ -186,7 +186,7 @@ const messages = {
     "no_reviews": "😪 No hay calificaciones existentes",
     "professor_title": "Profesor(a) {name}",
     "already_reported": "Este review ya ha sido reportado",
-    "donations": "Docaciones",
+    "donations": "Donaciones",
     "copyright": "Copyright",
     "about_title": "Esto es {bold}",
     "about_subtitle_1": "Acerca de Nosotros",
