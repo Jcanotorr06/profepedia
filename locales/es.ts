@@ -190,7 +190,9 @@ const messages = {
     "copyright": "Copyright",
     "about_title": "Esto es {bold}",
     "about_subtitle_1": "Acerca de Nosotros",
-    "about_description": "{bold} está hecha para estudiantes universitarios. Elegir los mejores cursos y profesores es un rito de iniciación para cada estudiante, y conectarse con sus compañeros en el sitio se ha convertido en una forma clave para que millones de estudiantes naveguen por este proceso. El sitio hace lo que los estudiantes han estado haciendo desde siempre: comunicarse entre sí (con sus amigos, sus hermanos, sus hermanas, sus compañeros de clase) para descubrir quién es un gran profesor y quién es uno que quizás desee evitar."
+    "about_description": "{bold} está hecha para estudiantes universitarios. Elegir los mejores cursos y profesores es un rito de iniciación para cada estudiante, y conectarse con sus compañeros en el sitio se ha convertido en una forma clave para que millones de estudiantes naveguen por este proceso. El sitio hace lo que los estudiantes han estado haciendo desde siempre: comunicarse entre sí (con sus amigos, sus hermanos, sus hermanas, sus compañeros de clase) para descubrir quién es un gran profesor y quién es uno que quizás desee evitar.",
+
+    "load_more": "Cargar Más"
 }
 
 export default messages
