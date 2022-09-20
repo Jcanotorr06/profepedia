@@ -11,8 +11,8 @@ interface Props{
 const GradeBar = ({ratio, textLeft, textRigth}:Props) => {
     return (
         <div className="flex gap-4 items-center text-sm md:text-base">
-            <div className="flex-1"><Translate label={textLeft}/></div>
-                <motion.div className="w-full h-10 ground overflow-hidden drop-shadow rounded-md flex-[2.5_2.5_0%] lg:flex-[5_5_0%]">
+            <div className="w-1/4 xl:w-1/6"><Translate label={textLeft}/></div>
+                <motion.div className="w-full h-10 ground overflow-hidden drop-shadow rounded-md flex-1">
                     <motion.div 
                         initial={{width: 0}} 
                         animate={{width: `${100*ratio}%`}} 
