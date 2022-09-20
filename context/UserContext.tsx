@@ -59,7 +59,7 @@ export function UserProvider({children}:Props) {
         console.log(supabaseUser)
         setUser(supabaseUser)
         if(supabaseUser){
-            let {ip} = await axios.get("https://www.myexternalip.com/json").then(res => res.data)
+           /*  let {ip} = await axios.get("https://www.myexternalip.com/json").then(res => res.data)
             console.log('IP ADDRESS: ',ip)
             if(!updating){
                 setUpdating(true)
@@ -70,7 +70,7 @@ export function UserProvider({children}:Props) {
                 })
                 setUpdating(false)
                 setChecking(false)
-            }
+            } */
         }
     } 
 
