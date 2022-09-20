@@ -19,8 +19,8 @@ const MainSearchBox = () => {
 
     const handleSearchChange = async (e:ChangeEvent<HTMLInputElement>) => {
       let { value, validity:{ valid } } = e.currentTarget
-      let payload = value.trim()
-      setQuery(payload)
+      //let payload = value.trim()
+      setQuery(value)
       setIsValid(valid)
     }
 
@@ -77,7 +77,7 @@ const MainSearchBox = () => {
                     type="text" 
                     minLength={4} 
                     maxLength={20}
-                    pattern="[a-zA-Z ]{4,20}"
+                    pattern="[a-zA-Z\s]"
                     required 
                     value={query} 
                     onChange={handleSearchChange} 
