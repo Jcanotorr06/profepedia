@@ -207,7 +207,7 @@ const MobileNavBar = () => {
                           className="flex-1 border-none text-input"
                           autoComplete="search_professor"
                           placeholder={intl.formatMessage({id: 'search_placeholder', defaultMessage: 'Buscar profesor'})}
-                          {...register("prof", {required: true, minLength: 2, maxLength: 20})}/>
+                          {...register("prof", {required: true, minLength: 2, maxLength: 20, pattern: {value: /^[A-Za-z ]+$/, message: "only_letters"}})}/>
                       </div>
                   </form>
                 </motion.div>
