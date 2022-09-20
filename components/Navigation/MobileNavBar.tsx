@@ -54,9 +54,6 @@ const MobileNavBar = () => {
     closed: {
       opacity: 0,
       y: "-100%",
-      transition: {
-        duration: 0.1
-      }
     },
     open: {
       opacity: 1,
@@ -132,15 +129,11 @@ const MobileNavBar = () => {
             <motion.ul
             variants={{
               closed: {
-                transition: {
-                  staggerChildren: 0.6,
-                  staggerDirection: -1
-                }
               },
               open: {
                 transition: {
-                  delayChildren: 0.5,
-                  staggerChildren: 0.5
+                  delayChildren: 0.1,
+                  staggerChildren: 0.2
                 }
               }
             }}
