@@ -452,7 +452,9 @@ const ReviewModal = () => {
                 </div>
                 </div>
                 <div className="form-control items-center">
-                    <button type="submit" className="button btn btn-md btn-success px-16 rounded-full" disabled={!ratingValue || !difficultyValue || !idAsignatura || !acceptTerms || reviewLength<10 || reviewLength>250 || loadingSendReview}>{loadingSendReview && <><Load type="spin" color="#000" width={20} height={20}/>&nbsp;</>}Submit</button>
+                    <button type="submit" className="button btn btn-md btn-success px-16 rounded-full" disabled={!ratingValue || !difficultyValue || !idAsignatura || !acceptTerms || reviewLength<10 || reviewLength>250 || loadingSendReview}>{loadingSendReview && <><Load type="spin" color="#000" width={20} height={20}/>&nbsp;</>}
+                        {intl.formatMessage({id: "submit_review", defaultMessage: "Enviar Reseña"})}
+                    </button>
                     {/* <input type="submit" className="button btn btn-md btn-success px-16 rounded-full" disabled={!ratingValue || !difficultyValue || !idAsignatura || !acceptTerms} value="Submit"/> */}
                 </div>
             </form>
