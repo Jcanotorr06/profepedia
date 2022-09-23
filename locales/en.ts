@@ -190,7 +190,8 @@ const messages = {
     "about_subtitle_1": "About Us",
     "about_description": "{bold} is built for college students. Choosing the best courses and professors is a rite of passage for every student, and connecting with peers on the site has become a key way for millions of students to navigate this process. The site does what students have been doing forever - checking in with each other – their friends, their brothers, their sisters, their classmates – to figure out who's a great professor and who's one you might want to avoid.",
 
-    "load_more": "Load More"
+    "load_more": "Load More",
+    "submit_review": "Submit Review"
 }
 
 export default messages
