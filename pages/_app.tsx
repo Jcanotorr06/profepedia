@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if(process.env.NODE_ENV === 'production') {
       disableReactDevTools()
+      console.log = console.info = console.warn = console.error = () => {}
     }
   }, [])
 
