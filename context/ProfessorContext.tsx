@@ -141,7 +141,7 @@ export function ProfessorProvider({children}:Props) {
         return new Promise<boolean>(async (resolve) => {
             const { data:_reviews, error, count } = await supabase.from("reviews_docentes_v2").select("*", {count: 'exact'}).eq("id_docente", professorId).limit(limit).order("likes", {ascending: false}).range(rangeStart, rangeEnd)
             console.log('REVIEWS: ',_reviews, 'COUNT: ', count, 'ERROR: ', error)
-            if(!error && _reviews && count){
+            if(!error && _reviews && (count || count === 0)){
                 setReviews(_reviews)
                 setReviewCount(count)
                 resolve(true)
