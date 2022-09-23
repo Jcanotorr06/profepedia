@@ -50,20 +50,21 @@ const ReviewModal = () => {
     const [acceptTerms, setAcceptTerms] = useState<boolean>(false)
     const [reviewLength, setReviewLength] = useState<number>(0)
     const [loadingSendReview, setLoadingSendReview] = useState<boolean>(false)
-    const getReviewDataRef = useRef(getReviewData)
     const five = [1,2,3,4,5]
-
-    useEffect(() => {
+    
+    const getReviewDataRef = useRef(getReviewData)
+    useLayoutEffect(() => {
+        getReviewDataRef.current = getReviewData
+    }, [getReviewData])
+    
+/*     useEffect(() => {
         let cancelled = false
         if(!tags[0] && !courses[0] && data && !loadingReviewData && !cancelled){
             getReviewDataRef.current(data.id)
         }
         return () => {cancelled = true}
-    }, [data, courses, tags, loadingReviewData])
+    }, [data, courses, tags, loadingReviewData]) */
 
-    useLayoutEffect(() => {
-        getReviewDataRef.current = getReviewData
-    }, [getReviewData])
 
     const handleRatingChange = (e:FormEvent<HTMLInputElement>) => {
         setRatingValue(parseInt(e.currentTarget.value))

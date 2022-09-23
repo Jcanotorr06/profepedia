@@ -264,7 +264,9 @@ export function ProfessorProvider({children}:Props) {
             }
             const rev = await getReviews(professorId, 10, 0, 9, refresh)
             const breakdown = await getRatingsBreakdown(professorId)
-            if(rev && breakdown){
+            const tg = tags.length > 0 ? true : await getTags()
+            const crs = await getCourses(professorId)
+            if(rev && breakdown && tg && crs){
                 resolve(true)
                 setLoading(false)
                 return
@@ -303,9 +305,10 @@ export function ProfessorProvider({children}:Props) {
     }
 
     const getReviewData = async (professorId:number) => {
+        console.log("CONEXT GETTING REVIEW DATA")
         setLoadingReviewData(true)
         const gotCourses = await getCourses(professorId)
-        const gotTags = await getTags()
+        const gotTags = tags.length > 0 ? true : await getTags()
 
         if(gotCourses && gotTags){
             setLoadingReviewData(false)
