@@ -114,7 +114,7 @@ const messages = {
     "review_success_title": "Thank you for your rating!",
     "review_success_message": "We appreciate your contribution to the community!",
 
-    "landing_title": "Find Your Professor And Share Your Oppinion",
+    "landing_title": "Find Your Professor And Share Your Opinion",
     "landing_description": "Tell us about your experiences with teachers and help other students to make the best decision.",
     "loading": "Loading",
     "no_results": "No results found",
